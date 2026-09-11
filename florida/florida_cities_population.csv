@@ -1,0 +1,718 @@
+year,place_id,city,population,city_clean
+2010,1200410,"Alafaya CDP, Florida",84809,Alafaya
+2011,1200410,"Alafaya CDP, Florida",67743,Alafaya
+2012,1200410,"Alafaya CDP, Florida",85334,Alafaya
+2013,1200410,"Alafaya CDP, Florida",76821,Alafaya
+2014,1200410,"Alafaya CDP, Florida",84594,Alafaya
+2015,1200410,"Alafaya CDP, Florida",85264,Alafaya
+2016,1200410,"Alafaya CDP, Florida",91779,Alafaya
+2017,1200410,"Alafaya CDP, Florida",88496,Alafaya
+2018,1200410,"Alafaya CDP, Florida",92740,Alafaya
+2019,1200410,"Alafaya CDP, Florida",96528,Alafaya
+2021,1200410,"Alafaya CDP, Florida",95779,Alafaya
+2022,1200410,"Alafaya CDP, Florida",91249,Alafaya
+2023,1200410,"Alafaya CDP, Florida",94330,Alafaya
+2024,1200410,"Alafaya CDP, Florida",98873,Alafaya
+2010,1207300,"Boca Raton city, Florida",84604,Boca Raton
+2011,1207300,"Boca Raton city, Florida",85334,Boca Raton
+2012,1207300,"Boca Raton city, Florida",87848,Boca Raton
+2013,1207300,"Boca Raton city, Florida",89409,Boca Raton
+2014,1207300,"Boca Raton city, Florida",91321,Boca Raton
+2015,1207300,"Boca Raton city, Florida",93226,Boca Raton
+2016,1207300,"Boca Raton city, Florida",96115,Boca Raton
+2017,1207300,"Boca Raton city, Florida",98153,Boca Raton
+2018,1207300,"Boca Raton city, Florida",99241,Boca Raton
+2019,1207300,"Boca Raton city, Florida",99795,Boca Raton
+2021,1207300,"Boca Raton city, Florida",95785,Boca Raton
+2022,1207300,"Boca Raton city, Florida",98997,Boca Raton
+2023,1207300,"Boca Raton city, Florida",99973,Boca Raton
+2024,1207300,"Boca Raton city, Florida",102235,Boca Raton
+2010,1207875,"Boynton Beach city, Florida",68380,Boynton Beach
+2011,1207875,"Boynton Beach city, Florida",68997,Boynton Beach
+2012,1207875,"Boynton Beach city, Florida",70120,Boynton Beach
+2013,1207875,"Boynton Beach city, Florida",71103,Boynton Beach
+2014,1207875,"Boynton Beach city, Florida",73121,Boynton Beach
+2015,1207875,"Boynton Beach city, Florida",73972,Boynton Beach
+2016,1207875,"Boynton Beach city, Florida",75569,Boynton Beach
+2017,1207875,"Boynton Beach city, Florida",77704,Boynton Beach
+2018,1207875,"Boynton Beach city, Florida",78038,Boynton Beach
+2019,1207875,"Boynton Beach city, Florida",78690,Boynton Beach
+2021,1207875,"Boynton Beach city, Florida",80083,Boynton Beach
+2022,1207875,"Boynton Beach city, Florida",80866,Boynton Beach
+2023,1207875,"Boynton Beach city, Florida",81252,Boynton Beach
+2024,1207875,"Boynton Beach city, Florida",83095,Boynton Beach
+2010,1208150,"Brandon CDP, Florida",102939,Brandon
+2011,1208150,"Brandon CDP, Florida",106312,Brandon
+2012,1208150,"Brandon CDP, Florida",101167,Brandon
+2013,1208150,"Brandon CDP, Florida",115318,Brandon
+2014,1208150,"Brandon CDP, Florida",105125,Brandon
+2015,1208150,"Brandon CDP, Florida",113968,Brandon
+2016,1208150,"Brandon CDP, Florida",109582,Brandon
+2017,1208150,"Brandon CDP, Florida",121190,Brandon
+2018,1208150,"Brandon CDP, Florida",119778,Brandon
+2019,1208150,"Brandon CDP, Florida",116829,Brandon
+2021,1208150,"Brandon CDP, Florida",116994,Brandon
+2022,1208150,"Brandon CDP, Florida",126628,Brandon
+2023,1208150,"Brandon CDP, Florida",116754,Brandon
+2024,1208150,"Brandon CDP, Florida",127048,Brandon
+2010,1210275,"Cape Coral city, Florida",154668,Cape Coral
+2011,1210275,"Cape Coral city, Florida",157476,Cape Coral
+2012,1210275,"Cape Coral city, Florida",161237,Cape Coral
+2013,1210275,"Cape Coral city, Florida",165849,Cape Coral
+2014,1210275,"Cape Coral city, Florida",169855,Cape Coral
+2015,1210275,"Cape Coral city, Florida",175230,Cape Coral
+2016,1210275,"Cape Coral city, Florida",179795,Cape Coral
+2017,1210275,"Cape Coral city, Florida",183356,Cape Coral
+2018,1210275,"Cape Coral city, Florida",189342,Cape Coral
+2019,1210275,"Cape Coral city, Florida",194504,Cape Coral
+2021,1210275,"Cape Coral city, Florida",204519,Cape Coral
+2022,1210275,"Cape Coral city, Florida",216984,Cape Coral
+2023,1210275,"Cape Coral city, Florida",224452,Cape Coral
+2024,1210275,"Cape Coral city, Florida",233025,Cape Coral
+2010,1212875,"Clearwater city, Florida",107697,Clearwater
+2011,1212875,"Clearwater city, Florida",107774,Clearwater
+2012,1212875,"Clearwater city, Florida",108732,Clearwater
+2013,1212875,"Clearwater city, Florida",109705,Clearwater
+2014,1212875,"Clearwater city, Florida",110709,Clearwater
+2015,1212875,"Clearwater city, Florida",112979,Clearwater
+2016,1212875,"Clearwater city, Florida",114351,Clearwater
+2017,1212875,"Clearwater city, Florida",115501,Clearwater
+2018,1212875,"Clearwater city, Florida",116484,Clearwater
+2019,1212875,"Clearwater city, Florida",116938,Clearwater
+2021,1212875,"Clearwater city, Florida",116667,Clearwater
+2022,1212875,"Clearwater city, Florida",117010,Clearwater
+2023,1212875,"Clearwater city, Florida",116868,Clearwater
+2024,1212875,"Clearwater city, Florida",116821,Clearwater
+2010,1214400,"Coral Springs city, Florida",121492,Coral Springs
+2011,1214400,"Coral Springs city, Florida",123336,Coral Springs
+2012,1214400,"Coral Springs city, Florida",125275,Coral Springs
+2013,1214400,"Coral Springs city, Florida",126595,Coral Springs
+2014,1214400,"Coral Springs city, Florida",127963,Coral Springs
+2015,1214400,"Coral Springs city, Florida",129502,Coral Springs
+2016,1214400,"Coral Springs city, Florida",130046,Coral Springs
+2017,1214400,"Coral Springs city, Florida",133058,Coral Springs
+2018,1214400,"Coral Springs city, Florida",133493,Coral Springs
+2019,1214400,"Coral Springs city, Florida",133765,Coral Springs
+2021,1214400,"Coral Springs city, Florida",132822,Coral Springs
+2022,1214400,"Coral Springs city, Florida",133365,Coral Springs
+2023,1214400,"Coral Springs city, Florida",134913,Coral Springs
+2024,1214400,"Coral Springs city, Florida",140816,Coral Springs
+2010,1216475,"Davie town, Florida",92290,Davie
+2011,1216475,"Davie town, Florida",93686,Davie
+2012,1216475,"Davie town, Florida",95492,Davie
+2013,1216475,"Davie town, Florida",96818,Davie
+2014,1216475,"Davie town, Florida",98905,Davie
+2015,1216475,"Davie town, Florida",100894,Davie
+2016,1216475,"Davie town, Florida",101857,Davie
+2017,1216475,"Davie town, Florida",105146,Davie
+2018,1216475,"Davie town, Florida",106565,Davie
+2019,1216475,"Davie town, Florida",106310,Davie
+2021,1216475,"Davie town, Florida",104873,Davie
+2022,1216475,"Davie town, Florida",106488,Davie
+2023,1216475,"Davie town, Florida",107814,Davie
+2024,1216475,"Davie town, Florida",112040,Davie
+2016,1216525,"Daytona Beach city, Florida",66649,Daytona Beach
+2017,1216525,"Daytona Beach city, Florida",68055,Daytona Beach
+2018,1216525,"Daytona Beach city, Florida",68862,Daytona Beach
+2019,1216525,"Daytona Beach city, Florida",69197,Daytona Beach
+2021,1216525,"Daytona Beach city, Florida",74435,Daytona Beach
+2022,1216525,"Daytona Beach city, Florida",77957,Daytona Beach
+2023,1216525,"Daytona Beach city, Florida",82493,Daytona Beach
+2024,1216525,"Daytona Beach city, Florida",86007,Daytona Beach
+2010,1216725,"Deerfield Beach city, Florida",75245,Deerfield Beach
+2011,1216725,"Deerfield Beach city, Florida",76392,Deerfield Beach
+2012,1216725,"Deerfield Beach city, Florida",77426,Deerfield Beach
+2013,1216725,"Deerfield Beach city, Florida",78045,Deerfield Beach
+2014,1216725,"Deerfield Beach city, Florida",78898,Deerfield Beach
+2015,1216725,"Deerfield Beach city, Florida",79769,Deerfield Beach
+2016,1216725,"Deerfield Beach city, Florida",79754,Deerfield Beach
+2017,1216725,"Deerfield Beach city, Florida",80572,Deerfield Beach
+2018,1216725,"Deerfield Beach city, Florida",80854,Deerfield Beach
+2019,1216725,"Deerfield Beach city, Florida",81070,Deerfield Beach
+2021,1216725,"Deerfield Beach city, Florida",86355,Deerfield Beach
+2022,1216725,"Deerfield Beach city, Florida",86781,Deerfield Beach
+2023,1216725,"Deerfield Beach city, Florida",87322,Deerfield Beach
+2024,1216725,"Deerfield Beach city, Florida",90487,Deerfield Beach
+2014,1217100,"Delray Beach city, Florida",65054,Delray Beach
+2015,1217100,"Delray Beach city, Florida",66261,Delray Beach
+2016,1217100,"Delray Beach city, Florida",67366,Delray Beach
+2017,1217100,"Delray Beach city, Florida",68749,Delray Beach
+2018,1217100,"Delray Beach city, Florida",69356,Delray Beach
+2019,1217100,"Delray Beach city, Florida",69449,Delray Beach
+2021,1217100,"Delray Beach city, Florida",66579,Delray Beach
+2022,1217100,"Delray Beach city, Florida",67035,Delray Beach
+2023,1217100,"Delray Beach city, Florida",67542,Delray Beach
+2024,1217100,"Delray Beach city, Florida",70133,Delray Beach
+2010,1217200,"Deltona city, Florida",85183,Deltona
+2011,1217200,"Deltona city, Florida",85212,Deltona
+2012,1217200,"Deltona city, Florida",85436,Deltona
+2013,1217200,"Deltona city, Florida",86300,Deltona
+2014,1217200,"Deltona city, Florida",86907,Deltona
+2015,1217200,"Deltona city, Florida",88474,Deltona
+2016,1217200,"Deltona city, Florida",90139,Deltona
+2017,1217200,"Deltona city, Florida",90743,Deltona
+2018,1217200,"Deltona city, Florida",91946,Deltona
+2019,1217200,"Deltona city, Florida",92752,Deltona
+2021,1217200,"Deltona city, Florida",95771,Deltona
+2022,1217200,"Deltona city, Florida",97285,Deltona
+2023,1217200,"Deltona city, Florida",98749,Deltona
+2024,1217200,"Deltona city, Florida",100515,Deltona
+2019,1217935,"Doral city, Florida",65746,Doral
+2021,1217935,"Doral city, Florida",75954,Doral
+2022,1217935,"Doral city, Florida",76999,Doral
+2023,1217935,"Doral city, Florida",79359,Doral
+2024,1217935,"Doral city, Florida",83620,Doral
+2010,1224000,"Fort Lauderdale city, Florida",166039,Fort Lauderdale
+2011,1224000,"Fort Lauderdale city, Florida",168527,Fort Lauderdale
+2012,1224000,"Fort Lauderdale city, Florida",170747,Fort Lauderdale
+2013,1224000,"Fort Lauderdale city, Florida",172374,Fort Lauderdale
+2014,1224000,"Fort Lauderdale city, Florida",176018,Fort Lauderdale
+2015,1224000,"Fort Lauderdale city, Florida",178587,Fort Lauderdale
+2016,1224000,"Fort Lauderdale city, Florida",178764,Fort Lauderdale
+2017,1224000,"Fort Lauderdale city, Florida",180071,Fort Lauderdale
+2018,1224000,"Fort Lauderdale city, Florida",182611,Fort Lauderdale
+2019,1224000,"Fort Lauderdale city, Florida",182434,Fort Lauderdale
+2021,1224000,"Fort Lauderdale city, Florida",181666,Fort Lauderdale
+2022,1224000,"Fort Lauderdale city, Florida",183156,Fort Lauderdale
+2023,1224000,"Fort Lauderdale city, Florida",184263,Fort Lauderdale
+2024,1224000,"Fort Lauderdale city, Florida",190640,Fort Lauderdale
+2010,1224125,"Fort Myers city, Florida",62429,Fort Myers
+2011,1224125,"Fort Myers city, Florida",63528,Fort Myers
+2012,1224125,"Fort Myers city, Florida",65733,Fort Myers
+2013,1224125,"Fort Myers city, Florida",68184,Fort Myers
+2014,1224125,"Fort Myers city, Florida",70916,Fort Myers
+2015,1224125,"Fort Myers city, Florida",74015,Fort Myers
+2016,1224125,"Fort Myers city, Florida",77154,Fort Myers
+2017,1224125,"Fort Myers city, Florida",79941,Fort Myers
+2018,1224125,"Fort Myers city, Florida",82260,Fort Myers
+2019,1224125,"Fort Myers city, Florida",87111,Fort Myers
+2021,1224125,"Fort Myers city, Florida",92244,Fort Myers
+2022,1224125,"Fort Myers city, Florida",95935,Fort Myers
+2023,1224125,"Fort Myers city, Florida",97369,Fort Myers
+2024,1224125,"Fort Myers city, Florida",99929,Fort Myers
+2019,1224562,"Fountainebleau CDP, Florida",68619,Fountainebleau
+2022,1224581,"Four Corners CDP, Florida",77430,Four Corners
+2023,1224581,"Four Corners CDP, Florida",72275,Four Corners
+2024,1224581,"Four Corners CDP, Florida",85069,Four Corners
+2010,1225175,"Gainesville city, Florida",124433,Gainesville
+2011,1225175,"Gainesville city, Florida",125325,Gainesville
+2012,1225175,"Gainesville city, Florida",126038,Gainesville
+2013,1225175,"Gainesville city, Florida",127493,Gainesville
+2014,1225175,"Gainesville city, Florida",128474,Gainesville
+2015,1225175,"Gainesville city, Florida",130133,Gainesville
+2016,1225175,"Gainesville city, Florida",131593,Gainesville
+2017,1225175,"Gainesville city, Florida",132253,Gainesville
+2018,1225175,"Gainesville city, Florida",133851,Gainesville
+2019,1225175,"Gainesville city, Florida",133990,Gainesville
+2021,1225175,"Gainesville city, Florida",140406,Gainesville
+2022,1225175,"Gainesville city, Florida",145212,Gainesville
+2023,1225175,"Gainesville city, Florida",145800,Gainesville
+2024,1225175,"Gainesville city, Florida",148716,Gainesville
+2010,1230000,"Hialeah city, Florida",225461,Hialeah
+2011,1230000,"Hialeah city, Florida",229967,Hialeah
+2012,1230000,"Hialeah city, Florida",231953,Hialeah
+2013,1230000,"Hialeah city, Florida",233394,Hialeah
+2014,1230000,"Hialeah city, Florida",235566,Hialeah
+2015,1230000,"Hialeah city, Florida",237082,Hialeah
+2016,1230000,"Hialeah city, Florida",236385,Hialeah
+2017,1230000,"Hialeah city, Florida",239682,Hialeah
+2018,1230000,"Hialeah city, Florida",238950,Hialeah
+2019,1230000,"Hialeah city, Florida",233362,Hialeah
+2021,1230000,"Hialeah city, Florida",220479,Hialeah
+2022,1230000,"Hialeah city, Florida",220274,Hialeah
+2023,1230000,"Hialeah city, Florida",221318,Hialeah
+2024,1230000,"Hialeah city, Florida",235384,Hialeah
+2010,1232000,"Hollywood city, Florida",141202,Hollywood
+2011,1232000,"Hollywood city, Florida",143351,Hollywood
+2012,1232000,"Hollywood city, Florida",145241,Hollywood
+2013,1232000,"Hollywood city, Florida",146522,Hollywood
+2014,1232000,"Hollywood city, Florida",148040,Hollywood
+2015,1232000,"Hollywood city, Florida",149721,Hollywood
+2016,1232000,"Hollywood city, Florida",152007,Hollywood
+2017,1232000,"Hollywood city, Florida",153625,Hollywood
+2018,1232000,"Hollywood city, Florida",154813,Hollywood
+2019,1232000,"Hollywood city, Florida",154802,Hollywood
+2021,1232000,"Hollywood city, Florida",152139,Hollywood
+2022,1232000,"Hollywood city, Florida",152662,Hollywood
+2023,1232000,"Hollywood city, Florida",153864,Hollywood
+2024,1232000,"Hollywood city, Florida",159072,Hollywood
+2014,1232275,"Homestead city, Florida",65514,Homestead
+2015,1232275,"Homestead city, Florida",66500,Homestead
+2016,1232275,"Homestead city, Florida",68000,Homestead
+2017,1232275,"Homestead city, Florida",69909,Homestead
+2018,1232275,"Homestead city, Florida",70469,Homestead
+2019,1232275,"Homestead city, Florida",69526,Homestead
+2021,1232275,"Homestead city, Florida",80523,Homestead
+2022,1232275,"Homestead city, Florida",81559,Homestead
+2023,1232275,"Homestead city, Florida",81672,Homestead
+2024,1232275,"Homestead city, Florida",85806,Homestead
+2021,1232610,"Horizon West CDP, Florida",72283,Horizon West
+2023,1232610,"Horizon West CDP, Florida",75002,Horizon West
+2024,1232610,"Horizon West CDP, Florida",69149,Horizon West
+2010,1235000,"Jacksonville city, Florida",823316,Jacksonville
+2011,1235000,"Jacksonville city, Florida",827909,Jacksonville
+2012,1235000,"Jacksonville city, Florida",836507,Jacksonville
+2013,1235000,"Jacksonville city, Florida",842588,Jacksonville
+2014,1235000,"Jacksonville city, Florida",853376,Jacksonville
+2015,1235000,"Jacksonville city, Florida",868031,Jacksonville
+2016,1235000,"Jacksonville city, Florida",880623,Jacksonville
+2017,1235000,"Jacksonville city, Florida",892064,Jacksonville
+2018,1235000,"Jacksonville city, Florida",903896,Jacksonville
+2019,1235000,"Jacksonville city, Florida",911528,Jacksonville
+2021,1235000,"Jacksonville city, Florida",954624,Jacksonville
+2022,1235000,"Jacksonville city, Florida",971315,Jacksonville
+2023,1235000,"Jacksonville city, Florida",985837,Jacksonville
+2024,1235000,"Jacksonville city, Florida",1009831,Jacksonville
+2018,1235875,"Jupiter town, Florida",65544,Jupiter
+2019,1235875,"Jupiter town, Florida",65797,Jupiter
+2010,1236100,"Kendall CDP, Florida",82561,Kendall
+2011,1236100,"Kendall CDP, Florida",75893,Kendall
+2012,1236100,"Kendall CDP, Florida",75640,Kendall
+2013,1236100,"Kendall CDP, Florida",71373,Kendall
+2014,1236100,"Kendall CDP, Florida",79143,Kendall
+2015,1236100,"Kendall CDP, Florida",76466,Kendall
+2016,1236100,"Kendall CDP, Florida",77619,Kendall
+2017,1236100,"Kendall CDP, Florida",73805,Kendall
+2018,1236100,"Kendall CDP, Florida",75979,Kendall
+2019,1236100,"Kendall CDP, Florida",80410,Kendall
+2021,1236100,"Kendall CDP, Florida",81524,Kendall
+2022,1236100,"Kendall CDP, Florida",80912,Kendall
+2023,1236100,"Kendall CDP, Florida",73368,Kendall
+2024,1236100,"Kendall CDP, Florida",82704,Kendall
+2013,1236950,"Kissimmee city, Florida",65186,Kissimmee
+2014,1236950,"Kissimmee city, Florida",66729,Kissimmee
+2015,1236950,"Kissimmee city, Florida",69152,Kissimmee
+2016,1236950,"Kissimmee city, Florida",69369,Kissimmee
+2017,1236950,"Kissimmee city, Florida",71103,Kissimmee
+2018,1236950,"Kissimmee city, Florida",73596,Kissimmee
+2019,1236950,"Kissimmee city, Florida",72701,Kissimmee
+2021,1236950,"Kissimmee city, Florida",79440,Kissimmee
+2022,1236950,"Kissimmee city, Florida",80009,Kissimmee
+2023,1236950,"Kissimmee city, Florida",81268,Kissimmee
+2024,1236950,"Kissimmee city, Florida",84767,Kissimmee
+2010,1238250,"Lakeland city, Florida",97530,Lakeland
+2011,1238250,"Lakeland city, Florida",98608,Lakeland
+2012,1238250,"Lakeland city, Florida",100009,Lakeland
+2013,1238250,"Lakeland city, Florida",100697,Lakeland
+2014,1238250,"Lakeland city, Florida",102335,Lakeland
+2015,1238250,"Lakeland city, Florida",104410,Lakeland
+2016,1238250,"Lakeland city, Florida",106419,Lakeland
+2017,1238250,"Lakeland city, Florida",108051,Lakeland
+2018,1238250,"Lakeland city, Florida",110494,Lakeland
+2019,1238250,"Lakeland city, Florida",112142,Lakeland
+2021,1238250,"Lakeland city, Florida",115401,Lakeland
+2022,1238250,"Lakeland city, Florida",120044,Lakeland
+2023,1238250,"Lakeland city, Florida",122246,Lakeland
+2024,1238250,"Lakeland city, Florida",124997,Lakeland
+2010,1239425,"Largo city, Florida",77663,Largo
+2011,1239425,"Largo city, Florida",77720,Largo
+2012,1239425,"Largo city, Florida",77871,Largo
+2013,1239425,"Largo city, Florida",78415,Largo
+2014,1239425,"Largo city, Florida",79028,Largo
+2015,1239425,"Largo city, Florida",81007,Largo
+2016,1239425,"Largo city, Florida",83077,Largo
+2017,1239425,"Largo city, Florida",84768,Largo
+2018,1239425,"Largo city, Florida",85008,Largo
+2019,1239425,"Largo city, Florida",84957,Largo
+2021,1239425,"Largo city, Florida",82333,Largo
+2022,1239425,"Largo city, Florida",82474,Largo
+2023,1239425,"Largo city, Florida",82238,Largo
+2024,1239425,"Largo city, Florida",82343,Largo
+2010,1239550,"Lauderhill city, Florida",67100,Lauderhill
+2011,1239550,"Lauderhill city, Florida",68115,Lauderhill
+2012,1239550,"Lauderhill city, Florida",69083,Lauderhill
+2013,1239550,"Lauderhill city, Florida",69793,Lauderhill
+2014,1239550,"Lauderhill city, Florida",70636,Lauderhill
+2015,1239550,"Lauderhill city, Florida",71574,Lauderhill
+2016,1239550,"Lauderhill city, Florida",71635,Lauderhill
+2017,1239550,"Lauderhill city, Florida",71976,Lauderhill
+2018,1239550,"Lauderhill city, Florida",72081,Lauderhill
+2019,1239550,"Lauderhill city, Florida",71863,Lauderhill
+2021,1239550,"Lauderhill city, Florida",73461,Lauderhill
+2022,1239550,"Lauderhill city, Florida",73637,Lauderhill
+2023,1239550,"Lauderhill city, Florida",73986,Lauderhill
+2024,1239550,"Lauderhill city, Florida",76623,Lauderhill
+2010,1239925,"Lehigh Acres CDP, Florida",88196,Lehigh Acres
+2011,1239925,"Lehigh Acres CDP, Florida",98100,Lehigh Acres
+2012,1239925,"Lehigh Acres CDP, Florida",104011,Lehigh Acres
+2013,1239925,"Lehigh Acres CDP, Florida",118806,Lehigh Acres
+2014,1239925,"Lehigh Acres CDP, Florida",111416,Lehigh Acres
+2015,1239925,"Lehigh Acres CDP, Florida",119480,Lehigh Acres
+2016,1239925,"Lehigh Acres CDP, Florida",115673,Lehigh Acres
+2017,1239925,"Lehigh Acres CDP, Florida",132618,Lehigh Acres
+2018,1239925,"Lehigh Acres CDP, Florida",135272,Lehigh Acres
+2019,1239925,"Lehigh Acres CDP, Florida",134667,Lehigh Acres
+2021,1239925,"Lehigh Acres CDP, Florida",126557,Lehigh Acres
+2022,1239925,"Lehigh Acres CDP, Florida",136910,Lehigh Acres
+2023,1239925,"Lehigh Acres CDP, Florida",130548,Lehigh Acres
+2024,1239925,"Lehigh Acres CDP, Florida",151444,Lehigh Acres
+2010,1243975,"Melbourne city, Florida",76083,Melbourne
+2011,1243975,"Melbourne city, Florida",76089,Melbourne
+2012,1243975,"Melbourne city, Florida",77047,Melbourne
+2013,1243975,"Melbourne city, Florida",77490,Melbourne
+2014,1243975,"Melbourne city, Florida",78486,Melbourne
+2015,1243975,"Melbourne city, Florida",80136,Melbourne
+2016,1243975,"Melbourne city, Florida",81192,Melbourne
+2017,1243975,"Melbourne city, Florida",82003,Melbourne
+2018,1243975,"Melbourne city, Florida",82823,Melbourne
+2019,1243975,"Melbourne city, Florida",83030,Melbourne
+2021,1243975,"Melbourne city, Florida",85091,Melbourne
+2022,1243975,"Melbourne city, Florida",86439,Melbourne
+2023,1243975,"Melbourne city, Florida",86956,Melbourne
+2024,1243975,"Melbourne city, Florida",87572,Melbourne
+2010,1245000,"Miami city, Florida",400892,Miami
+2011,1245000,"Miami city, Florida",408760,Miami
+2012,1245000,"Miami city, Florida",413864,Miami
+2013,1245000,"Miami city, Florida",417670,Miami
+2014,1245000,"Miami city, Florida",430341,Miami
+2015,1245000,"Miami city, Florida",440989,Miami
+2016,1245000,"Miami city, Florida",453584,Miami
+2017,1245000,"Miami city, Florida",463354,Miami
+2018,1245000,"Miami city, Florida",470911,Miami
+2019,1245000,"Miami city, Florida",467968,Miami
+2021,1245000,"Miami city, Florida",439906,Miami
+2022,1245000,"Miami city, Florida",449484,Miami
+2023,1245000,"Miami city, Florida",455955,Miami
+2024,1245000,"Miami city, Florida",487006,Miami
+2010,1245025,"Miami Beach city, Florida",88110,Miami Beach
+2011,1245025,"Miami Beach city, Florida",89845,Miami Beach
+2012,1245025,"Miami Beach city, Florida",90579,Miami Beach
+2013,1245025,"Miami Beach city, Florida",91019,Miami Beach
+2014,1245025,"Miami Beach city, Florida",91721,Miami Beach
+2015,1245025,"Miami Beach city, Florida",92311,Miami Beach
+2016,1245025,"Miami Beach city, Florida",91905,Miami Beach
+2017,1245025,"Miami Beach city, Florida",92319,Miami Beach
+2018,1245025,"Miami Beach city, Florida",91715,Miami Beach
+2019,1245025,"Miami Beach city, Florida",88885,Miami Beach
+2021,1245025,"Miami Beach city, Florida",80673,Miami Beach
+2022,1245025,"Miami Beach city, Florida",80027,Miami Beach
+2023,1245025,"Miami Beach city, Florida",79616,Miami Beach
+2024,1245025,"Miami Beach city, Florida",83264,Miami Beach
+2010,1245060,"Miami Gardens city, Florida",107559,Miami Gardens
+2011,1245060,"Miami Gardens city, Florida",109672,Miami Gardens
+2012,1245060,"Miami Gardens city, Florida",110739,Miami Gardens
+2013,1245060,"Miami Gardens city, Florida",111381,Miami Gardens
+2014,1245060,"Miami Gardens city, Florida",112270,Miami Gardens
+2015,1245060,"Miami Gardens city, Florida",113199,Miami Gardens
+2016,1245060,"Miami Gardens city, Florida",113045,Miami Gardens
+2017,1245060,"Miami Gardens city, Florida",113743,Miami Gardens
+2018,1245060,"Miami Gardens city, Florida",113085,Miami Gardens
+2019,1245060,"Miami Gardens city, Florida",110003,Miami Gardens
+2021,1245060,"Miami Gardens city, Florida",110881,Miami Gardens
+2022,1245060,"Miami Gardens city, Florida",110491,Miami Gardens
+2023,1245060,"Miami Gardens city, Florida",110714,Miami Gardens
+2024,1245060,"Miami Gardens city, Florida",116155,Miami Gardens
+2010,1245975,"Miramar city, Florida",122438,Miramar
+2011,1245975,"Miramar city, Florida",124285,Miramar
+2012,1245975,"Miramar city, Florida",128737,Miramar
+2013,1245975,"Miramar city, Florida",130281,Miramar
+2014,1245975,"Miramar city, Florida",134991,Miramar
+2015,1245975,"Miramar city, Florida",137115,Miramar
+2016,1245975,"Miramar city, Florida",138461,Miramar
+2017,1245975,"Miramar city, Florida",140323,Miramar
+2018,1245975,"Miramar city, Florida",140827,Miramar
+2019,1245975,"Miramar city, Florida",141196,Miramar
+2021,1245975,"Miramar city, Florida",135066,Miramar
+2022,1245975,"Miramar city, Florida",137208,Miramar
+2023,1245975,"Miramar city, Florida",138330,Miramar
+2024,1245975,"Miramar city, Florida",143244,Miramar
+2017,1249675,"North Port city, Florida",66293,North Port
+2018,1249675,"North Port city, Florida",68637,North Port
+2019,1249675,"North Port city, Florida",70722,North Port
+2021,1249675,"North Port city, Florida",80027,North Port
+2022,1249675,"North Port city, Florida",85102,North Port
+2023,1249675,"North Port city, Florida",88931,North Port
+2024,1249675,"North Port city, Florida",92866,North Port
+2022,1250750,"Ocala city, Florida",65498,Ocala
+2023,1250750,"Ocala city, Florida",68424,Ocala
+2024,1250750,"Ocala city, Florida",70245,Ocala
+2010,1253000,"Orlando city, Florida",239037,Orlando
+2011,1253000,"Orlando city, Florida",243209,Orlando
+2012,1253000,"Orlando city, Florida",249525,Orlando
+2013,1253000,"Orlando city, Florida",255479,Orlando
+2014,1253000,"Orlando city, Florida",262396,Orlando
+2015,1253000,"Orlando city, Florida",270917,Orlando
+2016,1253000,"Orlando city, Florida",277198,Orlando
+2017,1253000,"Orlando city, Florida",280258,Orlando
+2018,1253000,"Orlando city, Florida",285705,Orlando
+2019,1253000,"Orlando city, Florida",287435,Orlando
+2021,1253000,"Orlando city, Florida",309193,Orlando
+2022,1253000,"Orlando city, Florida",316086,Orlando
+2023,1253000,"Orlando city, Florida",320753,Orlando
+2024,1253000,"Orlando city, Florida",334871,Orlando
+2010,1254000,"Palm Bay city, Florida",103225,Palm Bay
+2011,1254000,"Palm Bay city, Florida",103234,Palm Bay
+2012,1254000,"Palm Bay city, Florida",104136,Palm Bay
+2013,1254000,"Palm Bay city, Florida",104894,Palm Bay
+2014,1254000,"Palm Bay city, Florida",105845,Palm Bay
+2015,1254000,"Palm Bay city, Florida",107895,Palm Bay
+2016,1254000,"Palm Bay city, Florida",110107,Palm Bay
+2017,1254000,"Palm Bay city, Florida",111660,Palm Bay
+2018,1254000,"Palm Bay city, Florida",114190,Palm Bay
+2019,1254000,"Palm Bay city, Florida",115560,Palm Bay
+2021,1254000,"Palm Bay city, Florida",122932,Palm Bay
+2022,1254000,"Palm Bay city, Florida",129246,Palm Bay
+2023,1254000,"Palm Bay city, Florida",135570,Palm Bay
+2024,1254000,"Palm Bay city, Florida",142035,Palm Bay
+2010,1254200,"Palm Coast city, Florida",77473,Palm Coast
+2011,1254200,"Palm Coast city, Florida",79538,Palm Coast
+2012,1254200,"Palm Coast city, Florida",79980,Palm Coast
+2013,1254200,"Palm Coast city, Florida",79378,Palm Coast
+2014,1254200,"Palm Coast city, Florida",82388,Palm Coast
+2015,1254200,"Palm Coast city, Florida",82121,Palm Coast
+2016,1254200,"Palm Coast city, Florida",88337,Palm Coast
+2017,1254200,"Palm Coast city, Florida",88394,Palm Coast
+2018,1254200,"Palm Coast city, Florida",87617,Palm Coast
+2019,1254200,"Palm Coast city, Florida",89797,Palm Coast
+2021,1254200,"Palm Coast city, Florida",93845,Palm Coast
+2022,1254200,"Palm Coast city, Florida",98411,Palm Coast
+2023,1254200,"Palm Coast city, Florida",102106,Palm Coast
+2024,1254200,"Palm Coast city, Florida",106726,Palm Coast
+2018,1254350,"Palm Harbor CDP, Florida",65994,Palm Harbor
+2022,1254350,"Palm Harbor CDP, Florida",68005,Palm Harbor
+2023,1254350,"Palm Harbor CDP, Florida",62105,Palm Harbor
+2010,1255775,"Pembroke Pines city, Florida",155252,Pembroke Pines
+2011,1255775,"Pembroke Pines city, Florida",157612,Pembroke Pines
+2012,1255775,"Pembroke Pines city, Florida",160292,Pembroke Pines
+2013,1255775,"Pembroke Pines city, Florida",162333,Pembroke Pines
+2014,1255775,"Pembroke Pines city, Florida",164625,Pembroke Pines
+2015,1255775,"Pembroke Pines city, Florida",166624,Pembroke Pines
+2016,1255775,"Pembroke Pines city, Florida",168587,Pembroke Pines
+2017,1255775,"Pembroke Pines city, Florida",170703,Pembroke Pines
+2018,1255775,"Pembroke Pines city, Florida",172387,Pembroke Pines
+2019,1255775,"Pembroke Pines city, Florida",173591,Pembroke Pines
+2021,1255775,"Pembroke Pines city, Florida",169388,Pembroke Pines
+2022,1255775,"Pembroke Pines city, Florida",169875,Pembroke Pines
+2023,1255775,"Pembroke Pines city, Florida",171105,Pembroke Pines
+2024,1255775,"Pembroke Pines city, Florida",179331,Pembroke Pines
+2012,1256825,"Pine Hills CDP, Florida",69219,Pine Hills
+2013,1256825,"Pine Hills CDP, Florida",67295,Pine Hills
+2014,1256825,"Pine Hills CDP, Florida",76021,Pine Hills
+2015,1256825,"Pine Hills CDP, Florida",76081,Pine Hills
+2016,1256825,"Pine Hills CDP, Florida",76048,Pine Hills
+2017,1256825,"Pine Hills CDP, Florida",76847,Pine Hills
+2018,1256825,"Pine Hills CDP, Florida",90070,Pine Hills
+2019,1256825,"Pine Hills CDP, Florida",94802,Pine Hills
+2021,1256825,"Pine Hills CDP, Florida",85927,Pine Hills
+2022,1256825,"Pine Hills CDP, Florida",72291,Pine Hills
+2023,1256825,"Pine Hills CDP, Florida",79274,Pine Hills
+2024,1256825,"Pine Hills CDP, Florida",76047,Pine Hills
+2010,1257425,"Plantation city, Florida",85217,Plantation
+2011,1257425,"Plantation city, Florida",86516,Plantation
+2012,1257425,"Plantation city, Florida",88019,Plantation
+2013,1257425,"Plantation city, Florida",90280,Plantation
+2014,1257425,"Plantation city, Florida",91454,Plantation
+2015,1257425,"Plantation city, Florida",92555,Plantation
+2016,1257425,"Plantation city, Florida",92717,Plantation
+2017,1257425,"Plantation city, Florida",93922,Plantation
+2018,1257425,"Plantation city, Florida",94291,Plantation
+2019,1257425,"Plantation city, Florida",94605,Plantation
+2021,1257425,"Plantation city, Florida",92981,Plantation
+2022,1257425,"Plantation city, Florida",96046,Plantation
+2023,1257425,"Plantation city, Florida",96537,Plantation
+2024,1257425,"Plantation city, Florida",100690,Plantation
+2015,1257900,"Poinciana CDP, Florida",73943,Poinciana
+2017,1257900,"Poinciana CDP, Florida",71694,Poinciana
+2018,1257900,"Poinciana CDP, Florida",71331,Poinciana
+2019,1257900,"Poinciana CDP, Florida",72545,Poinciana
+2021,1257900,"Poinciana CDP, Florida",65257,Poinciana
+2022,1257900,"Poinciana CDP, Florida",75778,Poinciana
+2023,1257900,"Poinciana CDP, Florida",78799,Poinciana
+2024,1257900,"Poinciana CDP, Florida",81260,Poinciana
+2010,1258050,"Pompano Beach city, Florida",100154,Pompano Beach
+2011,1258050,"Pompano Beach city, Florida",101632,Pompano Beach
+2012,1258050,"Pompano Beach city, Florida",102968,Pompano Beach
+2013,1258050,"Pompano Beach city, Florida",104406,Pompano Beach
+2014,1258050,"Pompano Beach city, Florida",106115,Pompano Beach
+2015,1258050,"Pompano Beach city, Florida",107771,Pompano Beach
+2016,1258050,"Pompano Beach city, Florida",109380,Pompano Beach
+2017,1258050,"Pompano Beach city, Florida",110464,Pompano Beach
+2018,1258050,"Pompano Beach city, Florida",111930,Pompano Beach
+2019,1258050,"Pompano Beach city, Florida",112122,Pompano Beach
+2021,1258050,"Pompano Beach city, Florida",111356,Pompano Beach
+2022,1258050,"Pompano Beach city, Florida",112308,Pompano Beach
+2023,1258050,"Pompano Beach city, Florida",113613,Pompano Beach
+2024,1258050,"Pompano Beach city, Florida",118110,Pompano Beach
+2017,1258350,"Port Charlotte CDP, Florida",65972,Port Charlotte
+2018,1258350,"Port Charlotte CDP, Florida",64815,Port Charlotte
+2019,1258350,"Port Charlotte CDP, Florida",65951,Port Charlotte
+2021,1258350,"Port Charlotte CDP, Florida",65671,Port Charlotte
+2022,1258350,"Port Charlotte CDP, Florida",69625,Port Charlotte
+2023,1258350,"Port Charlotte CDP, Florida",64797,Port Charlotte
+2024,1258350,"Port Charlotte CDP, Florida",68091,Port Charlotte
+2023,1258575,"Port Orange city, Florida",65965,Port Orange
+2024,1258575,"Port Orange city, Florida",66559,Port Orange
+2010,1258715,"Port St. Lucie city, Florida",165153,Port St. Lucie
+2011,1258715,"Port St. Lucie city, Florida",166162,Port St. Lucie
+2012,1258715,"Port St. Lucie city, Florida",168718,Port St. Lucie
+2013,1258715,"Port St. Lucie city, Florida",170999,Port St. Lucie
+2014,1258715,"Port St. Lucie city, Florida",174093,Port St. Lucie
+2015,1258715,"Port St. Lucie city, Florida",179410,Port St. Lucie
+2016,1258715,"Port St. Lucie city, Florida",185136,Port St. Lucie
+2017,1258715,"Port St. Lucie city, Florida",189331,Port St. Lucie
+2018,1258715,"Port St. Lucie city, Florida",195251,Port St. Lucie
+2019,1258715,"Port St. Lucie city, Florida",201858,Port St. Lucie
+2021,1258715,"Port St. Lucie city, Florida",217535,Port St. Lucie
+2022,1258715,"Port St. Lucie city, Florida",231804,Port St. Lucie
+2023,1258715,"Port St. Lucie city, Florida",245036,Port St. Lucie
+2024,1258715,"Port St. Lucie city, Florida",258578,Port St. Lucie
+2010,1260950,"Riverview CDP, Florida",66415,Riverview
+2011,1260950,"Riverview CDP, Florida",62319,Riverview
+2012,1260950,"Riverview CDP, Florida",79420,Riverview
+2013,1260950,"Riverview CDP, Florida",75934,Riverview
+2014,1260950,"Riverview CDP, Florida",81226,Riverview
+2015,1260950,"Riverview CDP, Florida",89746,Riverview
+2016,1260950,"Riverview CDP, Florida",88941,Riverview
+2017,1260950,"Riverview CDP, Florida",90538,Riverview
+2018,1260950,"Riverview CDP, Florida",89982,Riverview
+2019,1260950,"Riverview CDP, Florida",97034,Riverview
+2021,1260950,"Riverview CDP, Florida",114560,Riverview
+2022,1260950,"Riverview CDP, Florida",114454,Riverview
+2023,1260950,"Riverview CDP, Florida",119714,Riverview
+2024,1260950,"Riverview CDP, Florida",115462,Riverview
+2023,1262625,"St. Cloud city, Florida",66441,St. Cloud
+2024,1262625,"St. Cloud city, Florida",71018,St. Cloud
+2010,1263000,"St. Petersburg city, Florida",244818,St. Petersburg
+2011,1263000,"St. Petersburg city, Florida",244995,St. Petersburg
+2012,1263000,"St. Petersburg city, Florida",246533,St. Petersburg
+2013,1263000,"St. Petersburg city, Florida",249702,St. Petersburg
+2014,1263000,"St. Petersburg city, Florida",253682,St. Petersburg
+2015,1263000,"St. Petersburg city, Florida",257088,St. Petersburg
+2016,1263000,"St. Petersburg city, Florida",260991,St. Petersburg
+2017,1263000,"St. Petersburg city, Florida",263252,St. Petersburg
+2018,1263000,"St. Petersburg city, Florida",265100,St. Petersburg
+2019,1263000,"St. Petersburg city, Florida",265358,St. Petersburg
+2021,1263000,"St. Petersburg city, Florida",258214,St. Petersburg
+2022,1263000,"St. Petersburg city, Florida",261245,St. Petersburg
+2023,1263000,"St. Petersburg city, Florida",263546,St. Petersburg
+2024,1263000,"St. Petersburg city, Florida",267073,St. Petersburg
+2023,1263650,"Sanford city, Florida",65397,Sanford
+2024,1263650,"Sanford city, Florida",66920,Sanford
+2010,1268350,"Spring Hill CDP, Florida",97103,Spring Hill
+2011,1268350,"Spring Hill CDP, Florida",106718,Spring Hill
+2012,1268350,"Spring Hill CDP, Florida",101269,Spring Hill
+2013,1268350,"Spring Hill CDP, Florida",101349,Spring Hill
+2014,1268350,"Spring Hill CDP, Florida",98950,Spring Hill
+2015,1268350,"Spring Hill CDP, Florida",103197,Spring Hill
+2016,1268350,"Spring Hill CDP, Florida",111189,Spring Hill
+2017,1268350,"Spring Hill CDP, Florida",113508,Spring Hill
+2018,1268350,"Spring Hill CDP, Florida",117519,Spring Hill
+2019,1268350,"Spring Hill CDP, Florida",113787,Spring Hill
+2021,1268350,"Spring Hill CDP, Florida",123509,Spring Hill
+2022,1268350,"Spring Hill CDP, Florida",125603,Spring Hill
+2023,1268350,"Spring Hill CDP, Florida",121939,Spring Hill
+2024,1268350,"Spring Hill CDP, Florida",117931,Spring Hill
+2010,1269700,"Sunrise city, Florida",84717,Sunrise
+2011,1269700,"Sunrise city, Florida",85990,Sunrise
+2012,1269700,"Sunrise city, Florida",88859,Sunrise
+2013,1269700,"Sunrise city, Florida",90133,Sunrise
+2014,1269700,"Sunrise city, Florida",91256,Sunrise
+2015,1269700,"Sunrise city, Florida",92706,Sunrise
+2016,1269700,"Sunrise city, Florida",93723,Sunrise
+2017,1269700,"Sunrise city, Florida",94313,Sunrise
+2018,1269700,"Sunrise city, Florida",95461,Sunrise
+2019,1269700,"Sunrise city, Florida",95153,Sunrise
+2021,1269700,"Sunrise city, Florida",96031,Sunrise
+2022,1269700,"Sunrise city, Florida",96291,Sunrise
+2023,1269700,"Sunrise city, Florida",96808,Sunrise
+2024,1269700,"Sunrise city, Florida",100131,Sunrise
+2010,1270600,"Tallahassee city, Florida",181734,Tallahassee
+2011,1270600,"Tallahassee city, Florida",182955,Tallahassee
+2012,1270600,"Tallahassee city, Florida",186977,Tallahassee
+2013,1270600,"Tallahassee city, Florida",186408,Tallahassee
+2014,1270600,"Tallahassee city, Florida",188106,Tallahassee
+2015,1270600,"Tallahassee city, Florida",189894,Tallahassee
+2016,1270600,"Tallahassee city, Florida",190895,Tallahassee
+2017,1270600,"Tallahassee city, Florida",191039,Tallahassee
+2018,1270600,"Tallahassee city, Florida",193550,Tallahassee
+2019,1270600,"Tallahassee city, Florida",194503,Tallahassee
+2021,1270600,"Tallahassee city, Florida",197103,Tallahassee
+2022,1270600,"Tallahassee city, Florida",201728,Tallahassee
+2023,1270600,"Tallahassee city, Florida",202222,Tallahassee
+2024,1270600,"Tallahassee city, Florida",205091,Tallahassee
+2016,1270675,"Tamarac city, Florida",65190,Tamarac
+2017,1270675,"Tamarac city, Florida",65683,Tamarac
+2018,1270675,"Tamarac city, Florida",66043,Tamarac
+2019,1270675,"Tamarac city, Florida",66712,Tamarac
+2021,1270675,"Tamarac city, Florida",71522,Tamarac
+2022,1270675,"Tamarac city, Florida",71915,Tamarac
+2023,1270675,"Tamarac city, Florida",72360,Tamarac
+2024,1270675,"Tamarac city, Florida",75150,Tamarac
+2010,1271000,"Tampa city, Florida",336945,Tampa
+2011,1271000,"Tampa city, Florida",346064,Tampa
+2012,1271000,"Tampa city, Florida",347650,Tampa
+2013,1271000,"Tampa city, Florida",352981,Tampa
+2014,1271000,"Tampa city, Florida",358684,Tampa
+2015,1271000,"Tampa city, Florida",369028,Tampa
+2016,1271000,"Tampa city, Florida",377172,Tampa
+2017,1271000,"Tampa city, Florida",385423,Tampa
+2018,1271000,"Tampa city, Florida",392905,Tampa
+2019,1271000,"Tampa city, Florida",399690,Tampa
+2021,1271000,"Tampa city, Florida",387037,Tampa
+2022,1271000,"Tampa city, Florida",398160,Tampa
+2023,1271000,"Tampa city, Florida",403361,Tampa
+2024,1271000,"Tampa city, Florida",414575,Tampa
+2016,1271569,"The Hammocks CDP, Florida",65814,The Hammocks
+2017,1271569,"The Hammocks CDP, Florida",68457,The Hammocks
+2018,1271569,"The Hammocks CDP, Florida",64910,The Hammocks
+2019,1271569,"The Hammocks CDP, Florida",65765,The Hammocks
+2014,1271625,"The Villages CDP, Florida",68874,The Villages
+2015,1271625,"The Villages CDP, Florida",72590,The Villages
+2016,1271625,"The Villages CDP, Florida",71350,The Villages
+2017,1271625,"The Villages CDP, Florida",79620,The Villages
+2018,1271625,"The Villages CDP, Florida",80576,The Villages
+2019,1271625,"The Villages CDP, Florida",85377,The Villages
+2021,1271625,"The Villages CDP, Florida",80691,The Villages
+2022,1271625,"The Villages CDP, Florida",78517,The Villages
+2023,1271625,"The Villages CDP, Florida",79772,The Villages
+2024,1271625,"The Villages CDP, Florida",81782,The Villages
+2010,1272145,"Town 'n' Country CDP, Florida",81175,Town 'n' Country
+2011,1272145,"Town 'n' Country CDP, Florida",78227,Town 'n' Country
+2012,1272145,"Town 'n' Country CDP, Florida",81597,Town 'n' Country
+2013,1272145,"Town 'n' Country CDP, Florida",77829,Town 'n' Country
+2014,1272145,"Town 'n' Country CDP, Florida",87874,Town 'n' Country
+2015,1272145,"Town 'n' Country CDP, Florida",78996,Town 'n' Country
+2016,1272145,"Town 'n' Country CDP, Florida",87561,Town 'n' Country
+2017,1272145,"Town 'n' Country CDP, Florida",89143,Town 'n' Country
+2018,1272145,"Town 'n' Country CDP, Florida",82577,Town 'n' Country
+2019,1272145,"Town 'n' Country CDP, Florida",98550,Town 'n' Country
+2021,1272145,"Town 'n' Country CDP, Florida",87862,Town 'n' Country
+2022,1272145,"Town 'n' Country CDP, Florida",87521,Town 'n' Country
+2023,1272145,"Town 'n' Country CDP, Florida",78974,Town 'n' Country
+2024,1272145,"Town 'n' Country CDP, Florida",86253,Town 'n' Country
+2018,1275812,"Wellington village, Florida",65190,Wellington
+2019,1275812,"Wellington village, Florida",65389,Wellington
+2018,1275875,"Wesley Chapel CDP, Florida",65249,Wesley Chapel
+2019,1275875,"Wesley Chapel CDP, Florida",62516,Wesley Chapel
+2021,1275875,"Wesley Chapel CDP, Florida",77319,Wesley Chapel
+2022,1275875,"Wesley Chapel CDP, Florida",81390,Wesley Chapel
+2023,1275875,"Wesley Chapel CDP, Florida",82087,Wesley Chapel
+2024,1275875,"Wesley Chapel CDP, Florida",83673,Wesley Chapel
+2010,1276582,"Weston city, Florida",65528,Weston
+2011,1276582,"Weston city, Florida",66545,Weston
+2012,1276582,"Weston city, Florida",67645,Weston
+2013,1276582,"Weston city, Florida",68386,Weston
+2014,1276582,"Weston city, Florida",69091,Weston
+2015,1276582,"Weston city, Florida",69947,Weston
+2016,1276582,"Weston city, Florida",70023,Weston
+2017,1276582,"Weston city, Florida",70927,Weston
+2018,1276582,"Weston city, Florida",71224,Weston
+2019,1276582,"Weston city, Florida",71164,Weston
+2021,1276582,"Weston city, Florida",67322,Weston
+2022,1276582,"Weston city, Florida",67676,Weston
+2023,1276582,"Weston city, Florida",68168,Weston
+2024,1276582,"Weston city, Florida",70672,Weston
+2010,1276600,"West Palm Beach city, Florida",100175,West Palm Beach
+2011,1276600,"West Palm Beach city, Florida",101065,West Palm Beach
+2012,1276600,"West Palm Beach city, Florida",101910,West Palm Beach
+2013,1276600,"West Palm Beach city, Florida",102433,West Palm Beach
+2014,1276600,"West Palm Beach city, Florida",104017,West Palm Beach
+2015,1276600,"West Palm Beach city, Florida",106782,West Palm Beach
+2016,1276600,"West Palm Beach city, Florida",108149,West Palm Beach
+2017,1276600,"West Palm Beach city, Florida",110219,West Palm Beach
+2018,1276600,"West Palm Beach city, Florida",111389,West Palm Beach
+2019,1276600,"West Palm Beach city, Florida",111952,West Palm Beach
+2021,1276600,"West Palm Beach city, Florida",117253,West Palm Beach
+2022,1276600,"West Palm Beach city, Florida",120922,West Palm Beach
+2023,1276600,"West Palm Beach city, Florida",124148,West Palm Beach
+2024,1276600,"West Palm Beach city, Florida",127733,West Palm Beach

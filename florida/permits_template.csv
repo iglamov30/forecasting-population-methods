@@ -1,0 +1,6 @@
+year,place_id,city,permits_total,permits_sf,permits_mf
+# Fill in from https://www.census.gov/construction/bps/ -> "Places" annual tables.
+# permits_sf = single-family authorized units, permits_mf = units in structures with 5+ units.
+# place_id must match fl_cities.py exactly (Jacksonville=1235000, Miami=1245000,
+# Tampa=1271000, Orlando=1253000, St. Petersburg=1263000).
+# Delete these comment lines before loading with pandas.

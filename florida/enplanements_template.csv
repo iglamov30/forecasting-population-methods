@@ -1,0 +1,5 @@
+year,place_id,city,airport,enplanements
+# Fill in from BTS T-100 Domestic Market data: https://www.transtats.bts.gov
+# (Aviation -> Airline Origin and Destination Survey / T-100 Market -> filter by airport, sum enplanements per year)
+# place_id must match fl_cities.py exactly. airport = primary_airport from fl_cities.py.
+# Delete these comment lines before loading with pandas.

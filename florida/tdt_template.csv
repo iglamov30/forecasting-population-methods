@@ -1,0 +1,5 @@
+year,place_id,city,tdt_collections
+# Fill in from each county's tourism authority / tax collector site (see tourism_signals.py docstring).
+# tdt_collections = annual Tourist Development Tax ("bed tax") collections, nominal USD.
+# place_id must match fl_cities.py exactly.
+# Delete these comment lines before loading with pandas.
