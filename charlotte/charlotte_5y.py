@@ -1,8 +1,11 @@
+import os
 import warnings
 warnings.filterwarnings("ignore")
-from statsmodels.tools.sm_exceptions import ConvergenceWarning
+try:
+    from statsmodels.tools.sm_exceptions import ConvergenceWarning
+except ImportError:
+    ConvergenceWarning = Warning
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,9 +15,29 @@ from statsmodels.tsa.arima.model import ARIMA
 
 MODELS = ("ets", "arima")
 HORIZON = 5  # 5-year real-estate investment horizon
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def load_data(path="charlotte_population_updated.csv"):
-    df = pd.read_csv(path)
+def load_data(path="data/charlotte_population_updated.csv"):
+    candidates = []
+    if path and os.path.isabs(path):
+        candidates.append(path)
+    else:
+        candidates.extend([
+            os.path.join(BASE_DIR, path) if path else None,
+            os.path.join(os.getcwd(), path) if path else None,
+            path,
+        ])
+    candidates = [c for c in candidates if c]
+
+    for candidate in candidates:
+        if os.path.exists(candidate):
+            df = pd.read_csv(candidate)
+            break
+    else:
+        raise FileNotFoundError(
+            f"Data file not found: {path!r}. Tried: {candidates}"
+        )
+
     df.columns = [str(c).strip().lower() for c in df.columns]
     df = df.rename(columns={"year": "Year", "population": "Population"})
     df = df[["Year", "Population"]].dropna()
@@ -68,7 +91,6 @@ def rolling_backtest(series, model_type="ets", start=None, horizon=HORIZON, alph
         train = series[:i]
         fitted = fit(train, model_type)
         fc_mean, fc_lower, fc_upper = backtest_ci(fitted, model_type, horizon, alpha=alpha)
-        # Record only the horizon-th step (the 5-year-ahead prediction)
         predictions.append(fc_mean[-1])
         lower_list.append(fc_lower[-1])
         upper_list.append(fc_upper[-1])
@@ -76,7 +98,6 @@ def rolling_backtest(series, model_type="ets", start=None, horizon=HORIZON, alph
     predictions = np.asarray(predictions)
     lower_arr = np.asarray(lower_list)
     upper_arr = np.asarray(upper_list)
-    # Actual values at the horizon-th step for each window
     actual = series[start + horizon - 1: start + len(predictions) + horizon - 1]
     errors = actual - predictions
     mae = float(np.mean(np.abs(errors)))
@@ -84,15 +105,12 @@ def rolling_backtest(series, model_type="ets", start=None, horizon=HORIZON, alph
     return mae, rmse, predictions, lower_arr, upper_arr, start
 
 def forecast_horizon(fitted_model, model_type, horizon=HORIZON, alpha=0.05):
-    """Produce a `horizon`-step-ahead forecast with a 95% confidence interval."""
     return backtest_ci(fitted_model, model_type, horizon, alpha=alpha)
 
 def plot_backtest(years, series, results, horizon=HORIZON, alpha=0.05):
     plt.figure(figsize=(12, 7))
     all_starts = [results[m]["start"] for m in results]
     global_start = min(all_starts)
-
-    # Show all actuals from global_start for historical context
     plt.plot(years[global_start:], series[global_start:], marker="o", ms=3, label="Actual")
 
     for model_name, r in results.items():
@@ -100,7 +118,6 @@ def plot_backtest(years, series, results, horizon=HORIZON, alpha=0.05):
         lower = r["lower"]
         upper = r["upper"]
         start = r["start"]
-        # Each prediction at window i targets years[i + horizon - 1]
         model_years = years[start + horizon - 1: start + len(preds) + horizon - 1]
         plt.plot(
             model_years, preds, marker="x", ms=4, linestyle="--",
@@ -187,4 +204,4 @@ def run(path, show=True):
     return bt_results, forecasts
 
 if __name__ == "__main__":
-    run("charlotte_population_updated.csv")
+    run("data/charlotte_population_updated.csv")

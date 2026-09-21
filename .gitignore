@@ -1,25 +1,16 @@
-# secrets — never commit API keys
 secret.py
 .env
 .env.local
 !.env.example
-
-# Python bytecode / caches
 __pycache__/
 *.py[cod]
 *.egg-info/
 .ipynb_checkpoints/
-
-# virtual environments
 venv/
 .venv/
 env/
-
-# OS junk
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# editor settings (personal, not project config)
 .vscode/
 .idea/

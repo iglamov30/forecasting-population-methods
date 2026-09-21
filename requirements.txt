@@ -5,3 +5,4 @@ statsmodels
 requests
 arch
 pyarrow
+openpyxl

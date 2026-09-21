@@ -1,4 +1,5 @@
 import warnings
+from pathlib import Path
 warnings.filterwarnings("ignore")
 from statsmodels.tools.sm_exceptions import ConvergenceWarning
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
@@ -11,8 +12,9 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.arima.model import ARIMA
 
 MODELS = ("ets", "arima")
+DATA_PATH = Path(__file__).resolve().parent / "data" / "charlotte_population_updated.csv"
 
-def load_data(path="charlotte_population_updated.csv"):
+def load_data(path=DATA_PATH):
     df = pd.read_csv(path)
     df.columns = [str(c).strip().lower() for c in df.columns]
     df = df.rename(columns={"year": "Year", "population": "Population"})
@@ -102,7 +104,6 @@ def plot_backtest(years, series, results):
     plt.tight_layout()
     
 
-
 def plot_forecast(years, series, forecast_years, mean, lower, upper,
                   model_name, conf=0.95):
     plt.figure(figsize=(12, 7))
@@ -122,7 +123,6 @@ def plot_forecast(years, series, forecast_years, mean, lower, upper,
     plt.grid(which="minor", alpha=0.15)
     plt.tight_layout()
     
-
 def run(path, show=True):
     years, series = load_data(path)
     last_year = int(years[-1])
@@ -155,5 +155,5 @@ def run(path, show=True):
     return bt_results, forecasts
 
 if __name__ == "__main__":
-    run("charlotte_population_updated.csv")
+    run(DATA_PATH)
 

@@ -1,9 +1,9 @@
-# Data sources — Charlotte population growth model
+# Data Sources – Charlotte Population Growth Model
 Retrieved: 2026-06-11
 
-## Time series (saved in this folder)
+## Time Series
 
-1. charlotte_population.csv
+1. data/charlotte_population.csv 
    - Resident Population, Charlotte-Concord-Gastonia NC-SC MSA (CBSA 16740)
    - Source: U.S. Census Bureau, Population Estimates Program (PEP), Vintage 2025
    - Retrieved via FRED series CGRPOP (updated 2026-03-27)
@@ -13,19 +13,18 @@ Retrieved: 2026-06-11
      (~+505k) is a BOUNDARY CHANGE, not real growth. The pipeline splices
      the two segments via growth-rate chaining.
 
-2. charlotte_employment_monthly.csv
+2. data/charlotte_employment_monthly.csv
    - All Employees: Total Nonfarm, Charlotte MSA, seasonally adjusted, thousands
    - Source: BLS State & Metro Employment via FRED series CHAR737NA
      (1990-01 .. 2026-04, updated 2026-05-26)
 
-3. charlotte_permits_monthly.csv
+3. data/charlotte_permits_monthly.csv
    - New Private Housing Units Authorized by Building Permits, Charlotte MSA,
      all structure types, NSA, units
    - Source: Census Building Permits Survey via FRED series CHAR737BPPRIV
      (1988-01 .. 2026-04, updated 2026-06-01)
 
-## External anchor facts (used to calibrate the demographic-accounting model
-## and scenarios; cited in README)
+## Charlotte Demographic-Accounting Facts
 
 - Vintage 2025 (2024->2025): Charlotte metro was a top-5 US metro for numeric
   growth (after Houston, DFW, Atlanta, Phoenix). National metro growth slowed
