@@ -20,7 +20,7 @@ walk through the methodology interactively.
 | [`charlotte/`](charlotte/) | The original single-city forecast (Charlotte, NC metro) — this is where the modeling approach was built, and everywhere else reuses it |
 | [`florida/`](florida/) | The same approach applied to Florida's largest cities, plus an employment/permits/tourism composite investment screen |
 | [`population_matrix/`](population_matrix/) | Reusable toolkit: pull Census ACS1 population data for any US city into a year x city matrix |
-| [`citywide_forecast/`](citywide_forecast/) | The Charlotte methodology run across every US city ACS1 tracks (~96+ cities >= 65,000 population) |
+| [`citywide_forecast/`](citywide_forecast/) | The Charlotte methodology run across every US city ACS1 tracks (~550 places with population >= 65,000) |
 | [`model_benchmark/`](model_benchmark/) | A rigorous backtest benchmark: 6 forecasting models, ensembles, prediction intervals, and a pooled cross-city model, ranked head-to-head across ~96 cities. Start with `RESULTS.md`. |
 | [`real_estate_investment_thesis/`](real_estate_investment_thesis/) | Placeholder for turning these forecasts into an actual investment thesis |
 | [`legacy/`](legacy/) | Older outputs kept for reference, not reproducible from current code |

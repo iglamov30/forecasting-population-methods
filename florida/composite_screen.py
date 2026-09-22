@@ -1,60 +1,31 @@
-"""
-Florida 5-city composite investment score for Blackstone-style hotel and
-multifamily screening.
-
-Combines four independently-forecasted signals per city:
-  - Population growth        (Florida EDR municipal estimates, via edr_population.py)
-  - Employment growth        (BLS LAUS, via bls_employment.py)
-  - Housing permit growth    (Census BPS, via census_permits.py)
-  - Tourism demand growth    (TDT collections + airport enplanements,
-                               via tourism_signals.py)
-
-Each signal is forecast independently (ETS vs ARIMA, best model chosen by
-backtest MAE) over a 5-year horizon, then risk-adjusted by dividing the
-forecast growth rate by that model's own backtest RMSE (as a % of the
-latest value) — same logic as forecast_citywide_adj.py, just applied per
-metric instead of just to population.
-
-Two separate composite scores are produced because hotels and multifamily
-respond to different drivers:
-  HOTEL score        = population + employment + tourism (heavier weight)
-  MULTIFAMILY score   = population + employment + permits (heavier weight)
-
-Run this after you've populated tdt_manual.csv / enplanements_manual.csv /
-permits_manual.csv (see the *_template.csv files and each module's
-docstring for where to get that data) — population and employment will
-work out of the box against the live Census/BLS APIs if you have keys set.
-"""
-
+import os
+import sys
 import warnings
+from datetime import datetime
+
 warnings.filterwarnings("ignore")
 
-from datetime import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from fl_cities import FL_CITIES, short_name
-from edr_population import build_panel, city_series
-from charlotte_5y import fit, forecast_horizon, rolling_backtest, MODELS
+from sources.cities import FL_CITIES, short_name
+from sources.edr_population import build_panel, city_series
 
-HORIZON = 5
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "charlotte"))
+from charlotte_5y import fit, forecast_horizon, rolling_backtest, MODELS, HORIZON
+
+START_YEAR = 2010
 ALPHA = 0.10
 EPS = 1e-6
 MIN_OBS = HORIZON + 9
+OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs", "composite_scores.csv")
 
-# Composite weights -- adjust to taste. Each set is renormalized at runtime
-# over whatever signals actually have enough data.
 HOTEL_WEIGHTS = {"population": 0.25, "employment": 0.25, "permits": 0.10, "tourism": 0.40}
 MULTIFAMILY_WEIGHTS = {"population": 0.30, "employment": 0.30, "permits": 0.35, "tourism": 0.05}
 
 
 def forecast_metric(yrs, series, label):
-    """
-    Run both models via the existing charlotte_5y backtest/forecast
-    machinery, pick the better one by backtest MAE, and return a
-    risk-adjusted growth score plus the raw numbers for reporting.
-    """
     if len(series) < MIN_OBS:
         return None
 
@@ -91,53 +62,45 @@ def forecast_metric(yrs, series, label):
 
 
 def collect_signals():
-    """Pull/load all four panels. Returns dict of place_id -> {metric: result}."""
     current_year = datetime.now().year
-    pull_years = [y for y in range(2010, current_year + 1) if y != 2020]
 
-    print("Loading population panel (Florida EDR municipal estimates)...")
-    pop_panel = build_panel(pull_years)
+    print("Loading population (EDR)...")
+    pop_panel = build_panel([START_YEAR, current_year])
 
-    print("Fetching employment panel (BLS LAUS)...")
+    print("Fetching employment (BLS LAUS)...")
     try:
-        from bls_employment import build_employment_panel, county_series
-        emp_panel = build_employment_panel(FL_CITIES, 2010, current_year)
+        from sources.bls_employment import build_employment_panel, county_series
+        emp_panel = build_employment_panel(FL_CITIES, START_YEAR, current_year)
     except Exception as exc:
-        print(f"  employment pull failed ({exc}) — employment will be excluded from scoring.")
+        print(f"  employment pull failed ({exc}); employment excluded.")
         emp_panel, county_series = None, None
 
-    print("Loading permits panel...")
+    print("Fetching permits (Census BPS)...")
+    from sources.census_permits import fetch_place_permits, load_permits_manual, permits_series
     permits_panel = None
     try:
-        from census_permits import try_fetch_cbsa_permits, permits_series
-        permits_panel = try_fetch_cbsa_permits(FL_CITIES, 2010, current_year)
+        permits_panel = fetch_place_permits(FL_CITIES, START_YEAR, current_year)
     except Exception as exc:
-        print(f"  automated permits pull failed ({exc}), trying manual file...")
+        print(f"  download failed ({exc}); trying data/permits_manual.csv...")
         try:
-            from census_permits import load_permits_manual, permits_series
-            permits_panel = load_permits_manual("permits_manual.csv")
-        except Exception:
-            print("  no permits_manual.csv found — permits excluded from scoring. "
-                  "See permits_template.csv.")
-            permits_series = None
+            permits_panel = load_permits_manual()
+        except FileNotFoundError:
+            print("  no data/permits_manual.csv; permits excluded.")
 
-    print("Loading tourism panels (TDT + enplanements)...")
-    from tourism_signals import tourism_series
+    print("Loading tourism (hand-entered)...")
+    from sources.tourism import load_tdt_manual, load_enplanements_manual, tourism_series
     tdt_panel = enplane_panel = None
     try:
-        from tourism_signals import load_tdt_manual
-        tdt_panel = load_tdt_manual("tdt_manual.csv")
-    except Exception:
-        print("  no tdt_manual.csv found — TDT excluded from scoring. See tdt_template.csv.")
+        tdt_panel = load_tdt_manual()
+    except FileNotFoundError:
+        print("  no data/tdt_manual.csv; TDT excluded.")
     try:
-        from tourism_signals import load_enplanements_manual
-        enplane_panel = load_enplanements_manual("enplanements_manual.csv")
-    except Exception:
-        print("  no enplanements_manual.csv found — enplanements excluded from scoring. "
-              "See enplanements_template.csv.")
+        enplane_panel = load_enplanements_manual()
+    except FileNotFoundError:
+        print("  no data/enplanements_manual.csv; enplanements excluded.")
 
     results = {}
-    for pid, meta in FL_CITIES.items():
+    for pid in FL_CITIES:
         city_results = {}
 
         yrs, pop = city_series(pop_panel, pid)
@@ -181,10 +144,7 @@ def composite_score(city_results, weights):
     if not available:
         return None
     total_w = sum(available.values())
-    score = sum(
-        city_results[k]["risk_adj"] * (w / total_w) for k, w in available.items()
-    )
-    return score, list(available.keys())
+    return sum(city_results[k]["risk_adj"] * (w / total_w) for k, w in available.items())
 
 
 def main():
@@ -199,20 +159,20 @@ def main():
             "city": short_name(meta["city"]),
             "place_id": pid,
             "signals_used": ", ".join(sorted(cr.keys())) or "none",
-            "hotel_score": hotel[0] if hotel else np.nan,
-            "multifamily_score": multi[0] if multi else np.nan,
+            "hotel_score": np.nan if hotel is None else hotel,
+            "multifamily_score": np.nan if multi is None else multi,
             "pop_growth_5y_pct": cr.get("population", {}).get("pct_growth", np.nan),
         })
 
-    df = pd.DataFrame(rows)
+    df = pd.DataFrame(rows).sort_values("hotel_score", ascending=False)
 
-    print("\n" + "=" * 78)
-    print("FLORIDA 5-CITY COMPOSITE INVESTMENT SCORES")
-    print("=" * 78)
-    print(df.sort_values("hotel_score", ascending=False)
-          .to_string(index=False, float_format=lambda v: f"{v:,.2f}"))
+    print("\nComposite scores (higher is better)")
+    print(df.to_string(index=False, float_format=lambda v: f"{v:,.2f}"))
 
-    # Simple side-by-side bar chart comparing the two asset-class scores
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    df.to_csv(OUTPUT_PATH, index=False)
+    print(f"\nSaved {OUTPUT_PATH}")
+
     plot_df = df.dropna(subset=["hotel_score", "multifamily_score"], how="all")
     if not plot_df.empty:
         x = np.arange(len(plot_df))
@@ -225,7 +185,7 @@ def main():
         ax.set_xticks(x)
         ax.set_xticklabels(plot_df["city"], rotation=15)
         ax.set_ylabel("Risk-adjusted composite score")
-        ax.set_title("Florida 5-City Composite Score by Asset Class")
+        ax.set_title("Florida composite score by asset class")
         ax.axhline(0, color="black", linewidth=0.8)
         ax.legend()
         ax.grid(axis="y", linestyle="--", alpha=0.4)

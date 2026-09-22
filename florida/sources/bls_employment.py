@@ -1,12 +1,15 @@
 import os
 import time
-import requests
 import pandas as pd
-import numpy as np
+import requests
+
+if __package__ in (None, ""):
+    import sys
+
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 BLS_URL = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 MEASURE_EMPLOYMENT = "05"
-
 
 def _resolve_key(key=None):
     if key:
@@ -18,22 +21,16 @@ def _resolve_key(key=None):
         from secret import BLS_API_KEY
         return BLS_API_KEY
     except Exception:
-        return None  # BLS API works without a key at reduced rate limits
+        return None
 
 
 def laus_series_id(county_fips, measure=MEASURE_EMPLOYMENT):
-    """county_fips must be 5 digits, e.g. '12031' for Duval County, FL."""
     county_fips = str(county_fips).zfill(5)
     state, county = county_fips[:2], county_fips[2:]
     return f"LAUCN{state}{county}00000000{measure}"
 
 
 def fetch_laus(series_ids, start_year, end_year, key=None):
-    """
-    Fetch one or more LAUS series from the BLS API in batches of <=50 series
-    and <=20 years per request (public API v2 limits), returns a long-format
-    DataFrame: series_id, year, period, value.
-    """
     key = _resolve_key(key)
     all_rows = []
 
@@ -67,17 +64,12 @@ def fetch_laus(series_ids, start_year, end_year, key=None):
                     "value": float(item["value"]) if item["value"] not in ("-", "") else None,
                 })
 
-        time.sleep(0.5)  # be polite to the API
+        time.sleep(0.5)
 
     return pd.DataFrame(all_rows)
 
 
-def build_employment_panel(fl_cities, start_year, end_year, key=None):
-    """
-    fl_cities: dict shaped like fl_cities.FL_CITIES
-    Returns annual-average employment per county as a panel matching the
-    shape of census_devs.build_panel(): columns [year, place_id, city, employment]
-    """
+def build_employment_panel(fl_cities, start_year, end_year, key=None, min_months=12):
     county_to_place = {v["county_fips"]: (pid, v["city"]) for pid, v in fl_cities.items()}
     series_ids = [laus_series_id(fips) for fips in county_to_place]
     sid_to_fips = {laus_series_id(fips): fips for fips in county_to_place}
@@ -87,14 +79,22 @@ def build_employment_panel(fl_cities, start_year, end_year, key=None):
         raise RuntimeError("BLS API returned no data — check your key and date range.")
 
     raw = raw.dropna(subset=["value"])
-    raw = raw[raw["period"].str.match(r"M\d{2}")]  # drop annual-average M13 rows, keep monthly
-    raw = raw[raw["period"] != "M13"]
+    # Keep M01-M12; M13 is the BLS annual average, recomputed below.
+    raw = raw[raw["period"].str.match(r"M\d{2}") & (raw["period"] != "M13")]
 
     annual = (
-        raw.groupby(["series_id", "year"], as_index=False)["value"]
-        .mean()
-        .rename(columns={"value": "employment"})
+        raw.groupby(["series_id", "year"])["value"]
+        .agg(employment="mean", months="count")
+        .reset_index()
     )
+
+    partial = annual[annual["months"] < min_months]
+    if not partial.empty:
+        dropped = sorted(int(y) for y in partial["year"].unique())
+        print(f"  [bls] skipping {dropped}: fewer than {min_months} months "
+              f"published so far (partial year).")
+        annual = annual[annual["months"] >= min_months]
+    annual = annual.drop(columns="months")
 
     annual["county_fips"] = annual["series_id"].map(sid_to_fips)
     annual["place_id"] = annual["county_fips"].map(lambda f: county_to_place[f][0])
@@ -107,7 +107,6 @@ def build_employment_panel(fl_cities, start_year, end_year, key=None):
 
 
 def county_series(panel, place_id):
-    """Same interface as census_devs.city_series for drop-in reuse of forecast code."""
     sub = panel[panel["place_id"] == place_id].dropna(subset=["employment"])
     sub = sub.sort_values("year")
     return sub["year"].to_numpy(), sub["employment"].to_numpy()
@@ -116,10 +115,8 @@ def county_series(panel, place_id):
 if __name__ == "__main__":
     import datetime
 
-    from fl_cities import FL_CITIES, short_name
+    from sources.cities import FL_CITIES, short_name
 
-    # BLS LAUS county-level series begin in 1990; pull through the current
-    # year to capture all history the API has, whatever that turns out to be.
     START_YEAR = 1990
     END_YEAR = datetime.date.today().year
 
@@ -134,8 +131,8 @@ if __name__ == "__main__":
                   f"latest employment: {emp[-1]:,.0f}")
 
     out = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "florida_employment_all_years.csv"
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "employment_annual.csv"
     )
     wide = panel.pivot(index="year", columns="city", values="employment")
     wide.to_csv(out)
-    print(f"\nSaved wide employment series ({len(wide)} years) -> {out}")
+    print(f"\nSaved {out}")

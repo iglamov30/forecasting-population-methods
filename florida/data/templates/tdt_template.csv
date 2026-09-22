@@ -1,0 +1,5 @@
+year,place_id,city,tdt_collections
+# Fill in from each county's tourism authority / tax collector site (links in sources/tourism.py).
+# tdt_collections = annual Tourist Development Tax ("bed tax") collections, nominal USD.
+# place_id must match sources/cities.py exactly.
+# Lines starting with # are ignored when loaded.

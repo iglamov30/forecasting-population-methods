@@ -12,7 +12,10 @@ import os
 
 import pandas as pd
 
-from core.census import fetch_acs1_places
+try:
+    from .census import fetch_acs1_places
+except ImportError:  # pragma: no cover
+    from core.census import fetch_acs1_places
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw")
 

@@ -1,30 +1,6 @@
-"""
-florida_top5_forecast.py
-
-Runs the exact same forecasting methodology as charlotte_5y.py (rolling
-backtest to compare ETS vs ARIMA, then a 5-year-ahead forecast with a
-confidence interval from the better-performing model) on Miami, Orlando and
-Jacksonville, instead of a single hardcoded city.
-
-Reuses charlotte_5y.py's modeling functions directly (fit, rolling_backtest,
-forecast_horizon, MODELS, HORIZON) so the methodology is identical to the
-Charlotte analysis -- only the data source and the "loop over the target
-cities instead of 1" part is new. Population data comes from census_devs.py
-via the same pattern as florida_cities_data_pull.py.
-
-USAGE
------
-    python florida_top5_forecast.py
-    python florida_top5_forecast.py --start-year 2010 --alpha 0.05
-    python florida_top5_forecast.py --no-show --output fl_top5_forecast.csv
-
-SETUP
------
-Same as the rest of the project: put CENSUS_API_KEY in secret.py or the
-environment. See census_devs.py / test_census.py.
-"""
-
 import argparse
+import os
+import sys
 import warnings
 from datetime import datetime
 
@@ -35,19 +11,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-from edr_population import build_panel, city_series, list_cities, filter_florida, clean_city_name
+from sources.cities import CITY_NAMES
+from sources.edr_population import build_panel, city_series, list_cities, filter_florida, clean_city_name
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "charlotte"))
 from charlotte_5y import fit, rolling_backtest, forecast_horizon, plot_backtest, MODELS, HORIZON
 
-MIN_OBS = HORIZON + 9   # enough history for at least one rolling-backtest window
-
-# Only these three cities are forecast (must match the EDR "Municipality" names).
-TARGET_CITIES = ("Jacksonville", "Miami", "Orlando")
+MIN_OBS = HORIZON + 9   # enough history for at least one backtest window
+TARGET_CITIES = tuple(CITY_NAMES.values())
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def plot_forecast_city(years, series, forecast_years, mean, lower, upper,
                         model_name, city_label, conf=0.95, horizon=HORIZON):
-    """Same as charlotte_5y.plot_forecast, but with the city name in the title
-    instead of a hardcoded 'Charlotte'."""
     plt.figure(figsize=(12, 7))
     plt.plot(years, series, marker="o", ms=3, label="Actual")
     if len(mean):
@@ -73,8 +49,6 @@ def plot_forecast_city(years, series, forecast_years, mean, lower, upper,
 
 
 def run_city(city_label, yrs, pop, alpha, show):
-    """Mirrors charlotte_5y.run(), operating on an in-memory series instead
-    of loading a CSV."""
     last_year = int(yrs[-1])
     future_years = np.arange(last_year + 1, last_year + HORIZON + 1)
 
@@ -139,27 +113,22 @@ def run_city(city_label, yrs, pop, alpha, show):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run charlotte_5y-style ETS/ARIMA forecasting on Miami, Orlando and Jacksonville."
+        description="ETS/ARIMA 5-year population forecast for Florida's five largest cities."
     )
     parser.add_argument("--start-year", type=int, default=1979,
                          help="First year of EDR history to use (workbook starts at 1979).")
     parser.add_argument("--alpha", type=float, default=0.05,
                          help="Significance level for confidence intervals (default 0.05 = 95%% CI).")
-    parser.add_argument("--output", default="florida_top5_forecast.csv",
-                         help="Output CSV file path for the summary table.")
+    parser.add_argument("--output", default=os.path.join(SCRIPT_DIR, "outputs", "population_forecast.csv"),
+                         help="Output CSV path for the summary table.")
     parser.add_argument("--no-show", action="store_true",
-                         help="Skip rendering plots (just print the summary table).")
+                         help="Skip plots and only print the summary.")
     args = parser.parse_args()
     show = not args.no_show
 
     years = list(range(args.start_year, datetime.now().year + 1))
     print(f"Loading EDR municipal panel for {years[0]}-{years[-1]}...")
-    panel = build_panel(years)
-
-    fl_panel = filter_florida(panel)
-    if fl_panel.empty:
-        print("No Florida places found — check your years/key.")
-        return
+    fl_panel = filter_florida(build_panel(years))
 
     all_cities = list_cities(fl_panel)
     targets = all_cities[all_cities["city"].isin(TARGET_CITIES)]
@@ -177,20 +146,20 @@ def main():
     for place_id, meta in targets.iterrows():
         yrs, pop = city_series(fl_panel, place_id)
         if len(pop) < MIN_OBS:
-            print(f"\n{meta['city']}: skipped — only {len(pop)} years of data "
-                  f"(need >= {MIN_OBS} for a rolling backtest).")
+            print(f"\n{meta['city']}: skipped, only {len(pop)} years of data "
+                  f"(need {MIN_OBS} for a rolling backtest).")
             continue
         label = clean_city_name(meta["city"])
-        result = run_city(label, yrs, pop, alpha=args.alpha, show=show)
-        rows.append(result)
+        rows.append(run_city(label, yrs, pop, alpha=args.alpha, show=show))
 
     if not rows:
         print("\nNo cities had enough history to forecast.")
         return
 
     summary = pd.DataFrame(rows)
+    os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
     summary.to_csv(args.output, index=False)
-    print(f"\nSaved summary to: {args.output}")
+    print(f"\nSaved {args.output}")
 
     if show:
         plt.show()

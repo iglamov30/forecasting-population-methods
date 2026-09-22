@@ -1,0 +1,96 @@
+year,place_id,city,permits_total,permits_sf,permits_mf
+2007,1235000,"Jacksonville city, Florida",6245,3449,2670
+2008,1235000,"Jacksonville city, Florida",3968,2592,1303
+2009,1235000,"Jacksonville city, Florida",2638,1467,1161
+2010,1235000,"Jacksonville city, Florida",1465,1397,66
+2011,1235000,"Jacksonville city, Florida",1515,957,556
+2012,1235000,"Jacksonville city, Florida",3809,1310,2486
+2013,1235000,"Jacksonville city, Florida",2553,1844,693
+2014,1235000,"Jacksonville city, Florida",3302,2106,977
+2015,1235000,"Jacksonville city, Florida",4258,2350,1870
+2016,1235000,"Jacksonville city, Florida",5517,2678,2736
+2017,1235000,"Jacksonville city, Florida",5879,3005,2816
+2018,1235000,"Jacksonville city, Florida",7003,3780,3172
+2019,1235000,"Jacksonville city, Florida",6805,4155,2595
+2020,1235000,"Jacksonville city, Florida",9034,5549,3413
+2021,1235000,"Jacksonville city, Florida",9969,6191,3578
+2022,1235000,"Jacksonville city, Florida",11346,5484,5782
+2023,1235000,"Jacksonville city, Florida",9708,4223,5099
+2024,1235000,"Jacksonville city, Florida",6398,5037,1131
+2025,1235000,"Jacksonville city, Florida",5890,3611,2253
+2007,1245000,"Miami city, Florida",3272,73,3005
+2008,1245000,"Miami city, Florida",1226,37,1127
+2009,1245000,"Miami city, Florida",308,28,270
+2010,1245000,"Miami city, Florida",712,27,649
+2011,1245000,"Miami city, Florida",287,21,232
+2012,1245000,"Miami city, Florida",951,40,897
+2013,1245000,"Miami city, Florida",4486,115,4305
+2014,1245000,"Miami city, Florida",3786,72,3644
+2015,1245000,"Miami city, Florida",6490,98,6343
+2016,1245000,"Miami city, Florida",3910,87,3708
+2017,1245000,"Miami city, Florida",4761,90,4601
+2018,1245000,"Miami city, Florida",4625,80,4444
+2019,1245000,"Miami city, Florida",4468,107,4237
+2020,1245000,"Miami city, Florida",3583,81,3366
+2021,1245000,"Miami city, Florida",6255,102,6046
+2022,1245000,"Miami city, Florida",4358,127,4119
+2023,1245000,"Miami city, Florida",5420,113,5179
+2024,1245000,"Miami city, Florida",6023,145,5713
+2025,1245000,"Miami city, Florida",7219,152,6863
+2007,1253000,"Orlando city, Florida",2049,622,1371
+2008,1253000,"Orlando city, Florida",2119,348,1769
+2009,1253000,"Orlando city, Florida",297,235,47
+2010,1253000,"Orlando city, Florida",560,224,320
+2011,1253000,"Orlando city, Florida",945,308,633
+2012,1253000,"Orlando city, Florida",1885,815,1050
+2013,1253000,"Orlando city, Florida",2887,1037,1824
+2014,1253000,"Orlando city, Florida",2849,915,1860
+2015,1253000,"Orlando city, Florida",2586,850,1642
+2016,1253000,"Orlando city, Florida",1660,730,797
+2017,1253000,"Orlando city, Florida",1646,828,674
+2018,1253000,"Orlando city, Florida",3079,790,2119
+2019,1253000,"Orlando city, Florida",2634,747,1685
+2020,1253000,"Orlando city, Florida",4601,956,3385
+2021,1253000,"Orlando city, Florida",3724,990,2594
+2022,1253000,"Orlando city, Florida",3515,1286,2099
+2023,1253000,"Orlando city, Florida",2401,887,1476
+2024,1253000,"Orlando city, Florida",1970,914,1037
+2025,1253000,"Orlando city, Florida",2986,945,2026
+2007,1263000,"St. Petersburg city, Florida",509,170,339
+2008,1263000,"St. Petersburg city, Florida",122,102,20
+2009,1263000,"St. Petersburg city, Florida",763,47,716
+2010,1263000,"St. Petersburg city, Florida",338,70,268
+2011,1263000,"St. Petersburg city, Florida",114,100,14
+2012,1263000,"St. Petersburg city, Florida",490,110,380
+2013,1263000,"St. Petersburg city, Florida",1791,168,1614
+2014,1263000,"St. Petersburg city, Florida",538,177,358
+2015,1263000,"St. Petersburg city, Florida",1325,300,1022
+2016,1263000,"St. Petersburg city, Florida",1297,404,890
+2017,1263000,"St. Petersburg city, Florida",934,404,519
+2018,1263000,"St. Petersburg city, Florida",1003,335,659
+2019,1263000,"St. Petersburg city, Florida",2118,376,1736
+2020,1263000,"St. Petersburg city, Florida",589,355,213
+2021,1263000,"St. Petersburg city, Florida",1635,455,1171
+2022,1263000,"St. Petersburg city, Florida",1977,573,1370
+2023,1263000,"St. Petersburg city, Florida",2256,475,1699
+2024,1263000,"St. Petersburg city, Florida",1613,560,983
+2025,1263000,"St. Petersburg city, Florida",2641,629,1905
+2007,1271000,"Tampa city, Florida",3394,1008,2330
+2008,1271000,"Tampa city, Florida",1621,635,944
+2009,1271000,"Tampa city, Florida",794,445,329
+2010,1271000,"Tampa city, Florida",1098,455,625
+2011,1271000,"Tampa city, Florida",694,590,44
+2012,1271000,"Tampa city, Florida",2492,547,1869
+2013,1271000,"Tampa city, Florida",1854,686,1037
+2014,1271000,"Tampa city, Florida",2555,712,1751
+2015,1271000,"Tampa city, Florida",3155,1046,2040
+2016,1271000,"Tampa city, Florida",4262,934,3299
+2017,1271000,"Tampa city, Florida",3175,1010,2153
+2018,1271000,"Tampa city, Florida",1788,1109,646
+2019,1271000,"Tampa city, Florida",4777,1159,3549
+2020,1271000,"Tampa city, Florida",3333,1308,2019
+2021,1271000,"Tampa city, Florida",2405,1312,1073
+2022,1271000,"Tampa city, Florida",4810,1058,3746
+2023,1271000,"Tampa city, Florida",3153,738,2403
+2024,1271000,"Tampa city, Florida",2546,912,1620
+2025,1271000,"Tampa city, Florida",2818,948,1856

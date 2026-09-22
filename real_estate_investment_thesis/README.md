@@ -1,5 +1,8 @@
-# Real estate investment thesis
+# (In-progress) Real Estate Investment Thesis
 
-Placeholder for turning the population/employment/permits forecasts
-elsewhere in this repo into an actual investment thesis -- which metros
-and asset types the growth numbers point to, and why. Nothing here yet.
+Placeholder for utilizing population/employment/permits/supply-demand balance and other factors to propose an actual real estate investment thesis. It could point to a) metros or alternative general regions, b) asset classes and types. 
+<br>
+Constrains:
+- Finding suitable data for analysis. I assume you would need a subscription to paid services, such as CoStar, AirDna, Zillow, to load the data.
+- Identifying a suitable multivariate model for forecasting and investment analysis.
+

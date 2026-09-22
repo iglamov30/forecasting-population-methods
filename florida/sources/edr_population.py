@@ -1,58 +1,21 @@
-"""
-edr_population.py
-
-Drop-in replacement for census_devs.py's panel interface, sourced from the
-Florida Office of Economic & Demographic Research (EDR) municipal population
-workbook (FLmupops.xlsx) instead of the Census ACS1 API.
-
-Why switch sources: ACS1 (1-year estimates) only publishes for places with
-population >= 65,000 and only goes back to 2005 -- about 19 usable years, and
-only for the very largest cities. The EDR "BEBR" municipal estimates cover
-every incorporated Florida municipality every year from 1979, which gives
-40+ years of history for all five target cities and hundreds of smaller ones.
-
-This module exposes the same names the Florida forecast scripts import, so
-those scripts run unchanged once their import line is switched to point here:
-
-    build_panel(years=None)      -> DataFrame[year, place_id, city, county, population]
-    city_series(panel, place_id) -> (years ndarray, population ndarray)
-    list_cities(panel)           -> DataFrame indexed by place_id, cols [city, population]
-    filter_florida(panel)        -> panel unchanged (it is already Florida-only)
-    clean_city_name(name)        -> name (EDR names are already clean)
-
-Source file (kept alongside this script):
-    FLmupops.xlsx
-    https://edr.state.fl.us/Content/population-demographics/data/FLmupops.xlsx
-
-The workbook has one sheet per estimate year ("2025 BEBR", "2024 BEBR", ...).
-The decennial-census years 1980/1990/2000/2010 have no EDR estimate sheet; by
-default those four gap years are filled per-city by linear interpolation so
-the series handed to ETS/ARIMA is a clean annual grid. Pass
-fill_census_years=False to keep the raw gaps instead.
-"""
-
 import hashlib
 import os
 import re
-
 import numpy as np
 import pandas as pd
 
-XLSX_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "FLmupops.xlsx"
-)
+if __package__ in (None, ""):
+    import sys
 
-# Real Census place FIPS for the five target cities, so downstream output keeps
-# the same place_id values the old ACS1 path produced (see fl_cities.py).
-KNOWN_PLACE_IDS = {
-    "Jacksonville": "1235000",
-    "Miami": "1245000",
-    "Tampa": "1271000",
-    "Orlando": "1253000",
-    "St. Petersburg": "1263000",
-}
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Non-municipality rows that appear in the "Municipality" column of some sheets.
+from sources.cities import CITY_NAMES
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+XLSX_PATH = os.path.join(DATA_DIR, "FLmupops.xlsx")
+
+KNOWN_PLACE_IDS = {name: pid for pid, name in CITY_NAMES.items()}
+
 _SUMMARY_ROWS = (
     "total population",
     "incorporated population",
@@ -61,9 +24,7 @@ _SUMMARY_ROWS = (
 
 _cache = {}
 
-
 def _synth_place_id(city, county):
-    """Deterministic synthetic id for municipalities without a known FIPS."""
     h = int(hashlib.md5(f"{city}|{county}".encode("utf-8")).hexdigest(), 16)
     return "12" + f"{h % 100000:05d}"
 
@@ -73,7 +34,6 @@ def _place_id(city, county):
 
 
 def _parse_sheet(raw):
-    """Turn one raw EDR year sheet into [city, county, population] rows."""
     header_row = None
     for i in range(min(15, len(raw))):
         cells = [str(x).strip().lower() for x in raw.iloc[i].tolist()]
@@ -92,8 +52,6 @@ def _parse_sheet(raw):
     df = df[[c for c in ("city", "county", "population") if c in df.columns]]
 
     df["city"] = df["city"].astype(str).str.strip()
-    # The "Revised 2020" sheet tags some rows with a trailing footnote asterisk
-    # ("Miami *"); strip it so those merge into the main city series.
     df["city"] = df["city"].str.replace(r"\s*\*+$", "", regex=True).str.strip()
     df["county"] = df["county"].astype(str).str.strip()
     df["population"] = pd.to_numeric(df["population"], errors="coerce")
@@ -142,7 +100,6 @@ def _load_raw_panel():
 
 
 def _fill_census_years(panel):
-    """Linearly interpolate the missing 1980/1990/2000/2010 rows per city."""
     out = []
     for pid, g in panel.groupby("place_id", sort=False):
         g = g.sort_values("year")
@@ -168,11 +125,6 @@ def _fill_census_years(panel):
 
 
 def build_panel(years=None, fill_census_years=True):
-    """EDR analogue of census_devs.build_panel.
-
-    `years` is treated as an inclusive [min, max] range filter (matching how
-    the forecast scripts pass a contiguous list); pass None for all history.
-    """
     panel = _load_raw_panel().copy()
     if fill_census_years:
         panel = _fill_census_years(panel)
@@ -183,12 +135,10 @@ def build_panel(years=None, fill_census_years=True):
 
 
 def filter_florida(panel):
-    """No-op: the EDR panel is already Florida-only. Kept for import parity."""
     return panel.reset_index(drop=True)
 
 
 def clean_city_name(name):
-    """EDR names are already plain ('Miami', 'St. Petersburg'); trim only."""
     return str(name).replace(", Florida", "").strip()
 
 
@@ -226,12 +176,10 @@ if __name__ == "__main__":
             f"latest {int(v[-1]):,}"
         )
 
-    out = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "edr_top5_population.csv"
-    )
+    out = os.path.join(DATA_DIR, "population_top5.csv")
     wide = (
         p[p["place_id"].isin(KNOWN_PLACE_IDS.values())]
         .pivot(index="year", columns="city", values="population")
     )
     wide.to_csv(out)
-    print(f"\nSaved top-5 wide series -> {out}")
+    print(f"\nSaved {out}")
