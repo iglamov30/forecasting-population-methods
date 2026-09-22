@@ -4,9 +4,9 @@ Population forecasts and an investment screen for Florida's five largest
 cities: Jacksonville, Miami, Tampa, Orlando and St. Petersburg.
 
 The forecasting method is the one built in [`../charlotte/`](../charlotte/):
-damped-trend ETS and ARIMA(1,1,1) are each backtested over rolling 5-year
-windows, and the model with the lower error makes the forecast. The modeling
-functions are imported from `../charlotte/charlotte_5y.py`, so keep
+damped-trend ETS and ARIMA(1,1,1) are each backtested 5 years ahead from a
+rolling origin, and the model with the lower MAE makes the forecast. The
+modeling functions are imported from `../charlotte/charlotte_5y.py`, so keep
 `charlotte/` next to `florida/`.
 
 **Start here:** [`florida_walkthrough.ipynb`](florida_walkthrough.ipynb) runs
@@ -44,13 +44,17 @@ results. Everything in `outputs/` can be regenerated.
 | Script | What it does | Writes |
 |---|---|---|
 | `population_forecast.py` | Backtests ETS and ARIMA 5 years ahead for each city, then forecasts 5 years with the better model's confidence interval. | `outputs/population_forecast.csv` |
-| `population_momentum.py` | Divides each city's forecast growth by its backtest error (RMSE as % of population) and ranks by that. A fast-growing city the models predict poorly can rank below a slower, steadier one. Same scoring as `../citywide_forecast/forecast_citywide_adj.py`. | `outputs/population_momentum.csv` |
+| `population_momentum.py` | Divides each city's forecast growth by its backtest error (RMSE as % of population) and ranks by that. A fast-growing city the models predict poorly can rank below a slower, steadier one. Growth is measured to a sixth year: the 5-year forecast is extended one more year by repeating the last year's growth ratio, with the interval widened by the same ratio, so this file ends a year later than `population_forecast.csv`. Same scoring as `../citywide_forecast/forecast_citywide_adj.py`. | `outputs/population_momentum.csv` |
 | `miami_1y_backtest.py` | Backtest at a 1-year horizon, printing every window's error. Miami's EDR series drops from 497,924 (2020) to 449,747 (2021) because of the Census 2020 benchmark revision. At 5 years that break affects five backtest windows; at 1 year it affects one, which shows how the models do on clean data. | prints only |
 
-Population comes from the Florida Office of Economic & Demographic Research
-(EDR) municipal estimates, `data/FLmupops.xlsx`: every incorporated
-municipality, 1979 to date. Census ACS1 was used before, but it starts in
-2005 and only covers places above 65,000 people.
+Population comes from `data/FLmupops.xlsx`: the BEBR municipal estimates
+(University of Florida), published by the Office of Economic & Demographic
+Research (EDR). Every incorporated municipality, 1979 to date. The workbook
+has no sheet for the decennial years 1980, 1990, 2000 and 2010, so those four
+values are linearly interpolated on load (`_fill_census_years` in
+`sources/edr_population.py`); the other 43 are published estimates. Census
+ACS1 was used before, but it starts in 2005 and only covers places above
+65,000 people.
 
 ```bash
 python population_forecast.py
@@ -78,13 +82,15 @@ rescaled to sum to 1. The results are written to
 `outputs/composite_scores.csv`.
 
 Population, employment and permits load automatically. Tourism has to be
-entered by hand, because each county publishes bed tax collections in its
-own format:
+entered by hand, because each county publishes bed tax collections in its own
+format. EDR estimates realized collections for all 67 counties in one
+workbook, which is the fastest way to fill the file in; links to it and to
+each county's own numbers are at the top of `sources/tourism.py`.
 
 ```bash
 cp data/templates/tdt_template.csv data/tdt_manual.csv
 cp data/templates/enplanements_template.csv data/enplanements_manual.csv
-# fill them in; source links are in sources/tourism.py
+# then fill them in
 ```
 
 Until those files exist, the screen scores without tourism and says so. If
@@ -94,8 +100,9 @@ or AirDNA data, as long as it returns rows of `year, place_id, value`.
 
 ## Refreshing the data
 
-Each loader can be run from inside `florida/` to download the latest data
-and update its cached CSV:
+Each loader can be run from inside `florida/` to refresh its cached CSV.
+Employment and permits download; population reads the local workbook, and
+tourism only checks the hand-entered files:
 
 ```bash
 python -m sources.edr_population   # data/population_top5.csv

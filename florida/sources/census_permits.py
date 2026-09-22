@@ -62,6 +62,8 @@ def fetch_place_permits(fl_cities, start_year=FIRST_YEAR, end_year=None):
 
     if not rows:
         raise RuntimeError(
+            "no BPS place rows matched the five cities; check the Census "
+            "place files at " + BPS_PLACE_URL.format(year="<year>")
         )
     return pd.DataFrame(rows).sort_values(["place_id", "year"]).reset_index(drop=True)
 
