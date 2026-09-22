@@ -2,10 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
+from pathlib import Path
 
-CSV = "all_cities_forecast.csv"
+CSV = Path(__file__).resolve().parent / "all_US_cities_forecast.csv"
 YEARS = [2025, 2026, 2027, 2028, 2029]
-
 
 df = pd.read_csv(CSV)
 
@@ -35,8 +35,8 @@ PALETTE = ["#2196F3", "#FF5722", "#4CAF50", "#9C27B0", "#FF9800"]
 fig, axes = plt.subplots(1, 5, figsize=(18, 6), sharey=False)
 fig.suptitle(
     "Top 5 Cities by 5-Year Projected Population Growth\n"
-    "Shaded bands = 90 % confidence interval from best forecasting model",
-    fontsize=13, fontweight="bold", y=1.01
+    "Shaded bands = 90% prediction interval from best forecasting model",
+    fontsize=13, fontweight="bold", y=0.985
 )
 
 for ax, (_, row), color in zip(axes, top5.iterrows(), PALETTE):
@@ -82,16 +82,13 @@ for ax, (_, row), color in zip(axes, top5.iterrows(), PALETTE):
     ax.spines[["top", "right"]].set_visible(False)
 
 fig.text(
-    0.5, -0.04,
-    "Narrower confidence bands → more accurate model (lower MAE/RMSE). "
-    "Bands show 90 % prediction interval; actual values will lie outside ~10 % of the time.",
+    0.5, 0.015,
+    "Narrower bands mean a more accurate model (lower MAE/RMSE). "
+    "Actual values will fall outside the bands about 10% of the time.",
     ha="center", fontsize=8.5, color="#555555", style="italic"
 )
 
-plt.tight_layout()
-# out = "top5_growth_chart.png"
-# plt.savefig(out, dpi=150, bbox_inches="tight")
-# print(f"Saved: {out}")
+plt.tight_layout(rect=[0, 0.05, 1, 1])
 
 print("\nTop 5 cities by projected 5-year growth:")
 print(f"{'City':<40} {'Growth':>8}  {'Model':>6}  {'MAE':>10}  {'RMSE':>10}")

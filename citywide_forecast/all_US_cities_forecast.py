@@ -1,23 +1,24 @@
+import sys
 import warnings
 warnings.filterwarnings("ignore")
-
 import numpy as np
 import pandas as pd
 from datetime import datetime
+from pathlib import Path
 
-from census_devs import build_panel, city_series, list_cities
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "charlotte"))
+
+from census_acs1 import build_panel, city_series, list_cities
 from charlotte_5y import rolling_backtest, fit, forecast_horizon, MODELS, HORIZON
 
 START_YEAR = 2005
-MIN_OBS = HORIZON + 9   # need enough rows for at least one backtest window
+MIN_OBS = HORIZON + 9   
 
-ALPHA = 0.10            # 90% confidence intervals
-
+ALPHA = 0.10           
 
 def run_city(yrs, pop):
     if len(pop) < MIN_OBS:
         return None
-
     results = {}
     for m in MODELS:
         try:
@@ -34,7 +35,6 @@ def run_city(yrs, pop):
             pass
 
     return results if results else None
-
 
 def run_all(start_year=START_YEAR):
     pull_years = [y for y in range(start_year, datetime.now().year + 1) if y != 2020]
@@ -98,11 +98,10 @@ def run_all(start_year=START_YEAR):
 
     df = pd.DataFrame(rows).sort_values("last_population", ascending=False).reset_index(drop=True)
 
-    out = "all_cities_forecast.csv"
+    out = Path(__file__).resolve().parent / "all_US_cities_forecast.csv"
     df.to_csv(out, index=False)
     print(f"\nFinished. {len(df)} cities saved to '{out}'  ({skipped} skipped).")
     return df
-
 
 if __name__ == "__main__":
     run_all()

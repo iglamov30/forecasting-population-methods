@@ -13,7 +13,7 @@ inline plots and commentary. Alternatively, run `python charlotte_5y.py` from th
 
 | File | What it is |
 |---|---|
-| `charlotte_5y.py` | The current version — ETS/ARIMA backtest + 5-year forecast, with confidence intervals. `florida/` and `citywide_forecast/` each keep a copy of this file. |
+| `charlotte_5y.py` | The current version — ETS/ARIMA backtest + 5-year forecast, with confidence intervals. `florida/` keeps its own copy of this file; `citywide_forecast/` imports it from here. |
 | `charlotte_1y.py` | Earlier, simpler version of the pipeline: ETS/ARIMA backtest (one year ahead) with confidence intervals, forecasting to a fixed year (2030) rather than a rolling 5-year horizon |
 | `charlotte_walkthrough.ipynb` | Interactive walkthrough of `charlotte_5y.py` |
 | `archive/` | Earlier iterations (`charlotte_fixed.py`, `charlotte_forecast.py`, `charlotte_simple_forecast.py`, `charlotte_updated.py`), kept for reference (see `SOURCES.md` and inline comments for what each explored). Run them from inside `archive/` |
