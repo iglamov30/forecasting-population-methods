@@ -1,9 +1,3 @@
-"""Phase 3: compares simple-mean ensemble, trimmed-mean ensemble, and
-leakage-free per-city best-model selection on the same backtest windows.
-Run after scripts/run_backtest.py.
-
-    python model_benchmark/scripts/run_ensembles.py
-"""
 import os
 import sys
 import warnings
@@ -21,7 +15,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__
 def main():
     results = pd.read_parquet(os.path.join(DATA_DIR, "backtest_results.parquet"))
     table = compare_approaches(results)
-    table.to_csv(os.path.join(DATA_DIR, "phase3_ensemble_comparison.csv"), index=False)
+    table.to_csv(os.path.join(DATA_DIR, "ensemble_comparison.csv"), index=False)
 
     pd.set_option("display.width", 140)
     print(table.to_string(index=False))

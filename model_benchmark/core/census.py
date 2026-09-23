@@ -1,18 +1,4 @@
-"""
-Generalized Census ACS1 place-level fetcher.
-
-Same place_id construction and general shape as the project-root
-census_devs.py, but accepts a LIST of variables instead of one hardcoded
-constant, and returns long-format rows so any number of variables share one
-schema: [year, place_id, city, variable, value].
-
-Key resolution is intentionally narrow: only an explicitly passed `key` or
-the CENSUS_API_KEY environment variable is used. This module must never
-import secret.py.
-"""
-
 import os
-
 import pandas as pd
 import requests
 
@@ -34,12 +20,6 @@ def _resolve_key(key=None):
 
 
 def fetch_acs1_places(year, variables, key=None):
-    """
-    Fetch one or more ACS1 variables for all Census places in a given year.
-
-    variables: list[str] of ACS variable codes, e.g. ["B01003_001E"].
-    Returns a long-format DataFrame: [year, place_id, city, variable, value].
-    """
     key = _resolve_key(key)
     variables = list(variables)
 
@@ -55,7 +35,7 @@ def fetch_acs1_places(year, variables, key=None):
         resp.raise_for_status()
     except requests.HTTPError as exc:
         # Error messages embed the full request URL, key included. Never let
-        # that reach a print()/log — sanitize before it leaves this function.
+        # that reach a print()/log -- sanitize before it leaves this function.
         sanitized = str(exc).replace(key, "***")
         raise requests.HTTPError(sanitized) from None
 
@@ -77,11 +57,6 @@ def fetch_acs1_places(year, variables, key=None):
 
 
 def build_panel(years, variables, key=None):
-    """
-    Fetch ACS1 variables across multiple years and concatenate into one
-    long-format panel. Years that fail (e.g. no vintage published) are
-    skipped with a printed note rather than aborting the whole pull.
-    """
     frames = []
     fetched_years = []
     for y in years:

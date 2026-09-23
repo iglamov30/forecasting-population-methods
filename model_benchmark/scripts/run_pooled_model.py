@@ -1,9 +1,3 @@
-"""Phase 5: pooled AR(1)/AR(2) growth model with city fixed effects, shrunk
-toward each city's own local AR estimate, lambda selected by backtest.
-Run after scripts/build_cache.py (does not depend on run_backtest.py).
-
-    python model_benchmark/scripts/run_pooled_model.py
-"""
 import os
 import sys
 import warnings
@@ -31,9 +25,9 @@ def main():
 
     for order in (1, 2):
         bt, _ = run_pooled_backtest(panel, order=order)
-        bt.to_parquet(os.path.join(DATA_DIR, f"phase5_pooled_ar{order}_backtest.parquet"), index=False)
+        bt.to_parquet(os.path.join(DATA_DIR, f"pooled_ar{order}_backtest.parquet"), index=False)
         lam_table = score_by_lam(bt)
-        lam_table.to_csv(os.path.join(DATA_DIR, f"phase5_ar{order}_lam_selection.csv"), index=False)
+        lam_table.to_csv(os.path.join(DATA_DIR, f"pooled_ar{order}_lambda_selection.csv"), index=False)
         print(f"AR({order}) lambda selection:")
         print(lam_table.to_string(index=False))
         print()
@@ -46,7 +40,7 @@ def main():
             by_decile_lam.groupby("pop_decile")["abs_error"].idxmin()
         ][["pop_decile", "lam"]]
         best_lam_by_decile.to_csv(
-            os.path.join(DATA_DIR, f"phase5_ar{order}_best_lam_by_decile.csv"), index=False
+            os.path.join(DATA_DIR, f"pooled_ar{order}_best_lambda_by_decile.csv"), index=False
         )
         print(f"AR({order}) best lambda by population decile:")
         print(best_lam_by_decile.to_string(index=False))

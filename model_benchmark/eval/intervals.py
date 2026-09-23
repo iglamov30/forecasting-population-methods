@@ -1,36 +1,24 @@
-"""
-Phase 4: empirical prediction intervals (Rayer, Smith & Tayman 2009 style)
-vs. the model-internal intervals ARIMA and ETS produce on their own.
-
-SCOPE / LEAKAGE CAVEAT (be upfront about this): the empirical intervals
-below are built from the pooled Phase-2 backtest error sample and then
-evaluated for coverage against that SAME sample. That is an in-sample
-calibration check, not a genuine held-out prospective test -- with only
-~2-4 backtest origins per city there isn't enough data left to also hold
-out a separate coverage-test fold without the percentile estimates
-themselves becoming too noisy to trust. Treat the coverage numbers here as
-"is the shape of these intervals roughly right," not as proof a NEW,
-future forecast would hit 90% coverage. This is exactly the kind of
-qualification RESULTS.md is asked to be explicit about.
-
-Empirical intervals use the RATIO actual/predicted (not the raw signed
-error) so interval width scales proportionally with a city's population
-level, which is what lets one pooled or per-decile ratio distribution
-apply sensibly across cities of very different sizes.
-"""
-
+import os
+import sys
 import numpy as np
 import pandas as pd
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.exponential_smoothing.ets import ETSModel
+
+if __package__ in (None, ""):  # direct run: put the source root on sys.path
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from eval.backtest import MIN_TRAIN_SIZE
 from models.common import MIN_OBS
 
 ALPHA = 0.10  # nominal 90% interval
 LOWER_Q, UPPER_Q = ALPHA / 2, 1 - ALPHA / 2
+ETS_SIM_SEED = 0
 
 
+# Empirical intervals key off the RATIO actual/predicted rather than the raw
+# signed error, so width scales with a city's population level and one pooled
+# ratio distribution applies across cities of very different sizes.
 def _add_ratio(df):
     df = df.copy()
     df["ratio"] = df["actual"] / df["predicted"]
@@ -45,8 +33,6 @@ def empirical_pi_pooled(backtest_df, model="arima_111"):
 
 
 def assign_population_decile(panel):
-    """Decile by each city's mean population across the whole panel (not
-    just its latest value, so a city's decile doesn't drift year to year)."""
     mean_pop = panel.groupby("place_id")["population"].mean()
     decile = pd.qcut(mean_pop, 10, labels=False, duplicates="drop") + 1
     return decile.rename("pop_decile")
@@ -67,9 +53,6 @@ def empirical_pi_by_decile(backtest_df, panel, model="arima_111"):
 
 
 def mape_by_decile(backtest_df, panel, model="arima_111"):
-    """The literature (Rayer, Smith & Tayman) says error scales inversely
-    with area size -- check that against our own backtest before trusting
-    the decile-cut intervals built on top of it."""
     decile = assign_population_decile(panel)
     df = backtest_df[backtest_df["model"] == model].merge(
         decile, left_on="place_id", right_index=True
@@ -117,7 +100,12 @@ def _model_based_one_city(years, values, place_id, city, horizons=range(1, 6)):
                 res = ETSModel(
                     pd.Series(log_v), error="add", trend="add", damped_trend=True, seasonal=None
                 ).fit(disp=False)
-                sims = np.asarray(res.simulate(nsimulations=max(horizons), repetitions=500, anchor="end"))
+                # Seeded: without a fixed random_state the ETS coverage column
+                # moves by a few tenths of a point on every run.
+                sims = np.asarray(res.simulate(
+                    nsimulations=max(horizons), repetitions=500, anchor="end",
+                    random_state=ETS_SIM_SEED,
+                ))
                 lo_arr = np.exp(np.percentile(sims, LOWER_Q * 100, axis=1))
                 hi_arr = np.exp(np.percentile(sims, UPPER_Q * 100, axis=1))
                 mean_arr = np.exp(sims.mean(axis=1))
@@ -149,8 +137,6 @@ def model_based_intervals(panel, horizons=range(1, 6)):
 
 
 def empirical_intervals_for_backtest(backtest_df, pooled_pi, model="arima_111"):
-    """Attach [lower, upper] to every backtest row for `model` using the
-    POOLED (horizon-only) empirical ratio percentiles."""
     df = backtest_df[backtest_df["model"] == model].merge(pooled_pi, on="horizon")
     df["lower"] = df["predicted"] * df["ratio_lo"]
     df["upper"] = df["predicted"] * df["ratio_hi"]

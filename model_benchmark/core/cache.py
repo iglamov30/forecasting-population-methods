@@ -1,21 +1,11 @@
-"""
-Per-year parquet cache for ACS1 pulls.
-
-One file per year at model_benchmark/data/raw/acs1_{year}.parquet. If a cached
-file already contains every requested variable, no API call is made. If it
-exists but is missing a newly-requested variable, that year is re-fetched
-(the Census API returns every requested variable in one call regardless) and
-the cache file is overwritten with the union of variables.
-"""
-
 import os
-
+import sys
 import pandas as pd
 
-try:
-    from .census import fetch_acs1_places
-except ImportError:  # pragma: no cover
-    from core.census import fetch_acs1_places
+if __package__ in (None, ""):  # direct run: put the source root on sys.path
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from core.census import fetch_acs1_places
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw")
 
@@ -25,8 +15,6 @@ def _cache_path(year):
 
 
 def get_or_fetch_year(year, variables, key=None):
-    """Returns a long-format DataFrame [year, place_id, city, variable, value]
-    for the requested variables in one year, using the parquet cache."""
     os.makedirs(DATA_DIR, exist_ok=True)
     path = _cache_path(year)
     variables = list(variables)

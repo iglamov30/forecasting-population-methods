@@ -1,25 +1,3 @@
-"""
-Phase 5: pooled / global AR model on annualized log growth, with
-per-city shrinkage toward the pooled coefficient.
-
-NO-LEAKAGE ENFORCEMENT: the outer loop in `run_pooled_backtest` is over a
-shared calendar ORIGIN_YEAR (not per-city index, unlike eval/backtest.py --
-pooling across cities only makes sense on a common time axis). At each
-origin_year, `_growth_panel_through` rebuilds the pooled regression, every
-city's local regression, and every city's own last growth observations
-using ONLY g[i,t] rows whose target year t is <= origin_year. Nothing at or
-after origin_year+1 enters any estimation step. Year fixed effects are
-estimated only from data <= origin_year and are then set to 0 when
-forecasting forward (see `_forecast_city`), since a future year's shock
-(the next 2008 or 2020) is by definition unknown at forecast time.
-
-GROWTH DEFINITION: g[i,t] = (log p[i,t] - log p[i,t-1]) / (year[t] -
-year[t-1]) -- dividing by the elapsed calendar gap annualizes the one
-2019->2021 transition per city so it is comparable to every other,
-single-year transition, instead of implicitly doubling that one step's
-apparent growth.
-"""
-
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
@@ -30,8 +8,6 @@ MIN_G_FOR_LOCAL_AR2 = 5
 
 
 def build_growth_panel(panel):
-    """Returns [place_id, city, year, g] with g = annualized log growth
-    ending at `year`, i.e. g[i,t] uses only p[i,t] and p[i,t-1]."""
     rows = []
     for pid, g in panel.groupby("place_id"):
         g = g.sort_values("year")
@@ -53,8 +29,6 @@ def _add_lags(growth_panel, n_lags=2):
 
 
 def fit_pooled_ar(g_df, order=1):
-    """Pooled AR(order) with city + year fixed effects. Returns (rho, dict
-    of city fixed effects, dict of year fixed effects, base intercept)."""
     lag_cols = [f"g_lag{k}" for k in range(1, order + 1)]
     sub = g_df.dropna(subset=lag_cols + ["g"]).copy()
 
@@ -76,7 +50,6 @@ def fit_pooled_ar(g_df, order=1):
 
 
 def fit_local_ar(city_g, order=1):
-    """Per-city AR(order), no pooling. Returns None if too little data."""
     lag_cols = [f"g_lag{k}" for k in range(1, order + 1)]
     sub = city_g.dropna(subset=lag_cols + ["g"])
     min_needed = MIN_G_FOR_LOCAL_AR1 if order == 1 else MIN_G_FOR_LOCAL_AR2
@@ -90,18 +63,12 @@ def fit_local_ar(city_g, order=1):
 
 
 def shrink_rho(pooled_rho, local_rho, lam, order):
-    """theta_city = lam*pooled + (1-lam)*local, component-wise. Falls back
-    to pure pooled (lam=1 behavior) if no local estimate exists for a
-    city -- there isn't enough history to do anything else."""
     if local_rho is None:
         return dict(pooled_rho)
     return {k: lam * pooled_rho[k] + (1 - lam) * local_rho[k] for k in pooled_rho}
 
 
 def _forecast_city(last_log_pop, last_year, last_g_values, rho, const, order, h_max):
-    """Recursively forecast g forward using the (possibly shrunk) AR
-    coefficients, with year FE fixed at 0 (see module docstring), then
-    integrate g back to the population level."""
     g_hist = list(last_g_values)  # [..., g_{T-1}, g_T], most recent last
     g_future = []
     for _ in range(h_max):
@@ -116,9 +83,6 @@ def _forecast_city(last_log_pop, last_year, last_g_values, rho, const, order, h_
 
 
 def run_pooled_backtest(panel, order=1, lam_grid=LAM_GRID, origin_years=None, horizons=range(1, 6)):
-    """Expanding-window backtest of the pooled/shrunk AR(order) model.
-    Returns a long DataFrame [place_id, city, origin_year, horizon,
-    target_year, actual, lam, predicted]."""
     g_all = _add_lags(build_growth_panel(panel), n_lags=order)
     year_to_value = {
         pid: dict(zip(g["year"], g["population"]))
@@ -135,6 +99,11 @@ def run_pooled_backtest(panel, order=1, lam_grid=LAM_GRID, origin_years=None, ho
 
     out_rows = []
     for origin_year in origin_years:
+        # NO LEAKAGE: the pooled regression, every city's local regression and
+        # each city's last growth observations are all rebuilt here from rows
+        # with year <= origin_year. Year fixed effects are estimated only from
+        # that window and zeroed when forecasting forward, since a future year's
+        # shock is unknown at forecast time (see _forecast_city).
         train = g_all[g_all["year"] <= origin_year]
         pooled = fit_pooled_ar(train, order=order)
 
@@ -145,9 +114,12 @@ def run_pooled_backtest(panel, order=1, lam_grid=LAM_GRID, origin_years=None, ho
 
         for pid, city_g in train.groupby("place_id"):
             city_g = city_g.sort_values("year")
-            if city_g["year"].max() != city_g["year"].max():  # no-op guard
+            # The city must have a growth observation at the origin itself --
+            # a stale series (one that stops before origin_year) carries no
+            # usable starting point. Currently subsumed by the log_pop_lookup
+            # check below, but stated here so the requirement is explicit.
+            if city_g["year"].max() != origin_year:
                 continue
-            # last `order` observed g values strictly through origin_year
             recent = city_g.dropna(subset=["g"])
             if len(recent) < order:
                 continue
@@ -205,9 +177,4 @@ def score_by_lam_and_horizon(pooled_bt_df):
 
 
 def nickell_bias_estimate(pooled_rho1, avg_T):
-    """Leading-order Nickell (1981) bias for a dynamic panel AR(1) with
-    fixed effects: bias ~= -(1+rho)/T. This is the well-known first-order
-    approximation, not a full small-sample correction (e.g. Kiviet 1995 or
-    Arellano-Bond GMM) -- those are out of scope here; this only reports
-    the plausible MAGNITUDE of the downward bias in rho_pooled."""
     return -(1 + pooled_rho1) / avg_T

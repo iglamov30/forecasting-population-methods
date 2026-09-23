@@ -1,8 +1,9 @@
-"""(c) Exponential / geometric growth: OLS of log(population) on calendar
-year -> constant annualized growth rate. Regressing on actual year (not a
-sequential index) handles the 2020 gap for free."""
-
+import os
+import sys
 import numpy as np
+
+if __package__ in (None, ""):  # direct run: put the source root on sys.path
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.common import future_years
 

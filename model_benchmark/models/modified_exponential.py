@@ -1,18 +1,14 @@
-"""(d) Modified exponential with a FIXED ceiling (not estimated -- an
-unidentified saturation ceiling is exactly what the n~15-19 constraint rules
-out for logistic/Gompertz). Model: log(ceiling - p) = a + b*year, fit by OLS
-on the transformed series; ceiling is a parameter, not a free parameter of
-the fit.
-
-Default ceiling = DEFAULT_CEILING_MULTIPLIER * max(observed population) when
-the caller doesn't supply one. This is an explicit, documented assumption
-(not a literature-derived value) -- flagged here and in RESULTS.md.
-"""
-
+import os
+import sys
 import numpy as np
+
+if __package__ in (None, ""):  # direct run: put the source root on sys.path
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.common import future_years
 
+# Explicit assumption, not a literature-derived value (flagged in RESULTS.md):
+# the saturation ceiling is fixed, never estimated from the data.
 DEFAULT_CEILING_MULTIPLIER = 3.0
 
 

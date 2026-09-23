@@ -1,25 +1,10 @@
-"""
-Phase 3: ensemble/selection rules evaluated on the same backtest windows as
-Phase 2.
-
-NO-LEAKAGE ENFORCEMENT: the two ensembles (simple mean, trimmed mean) only
-combine forecasts that were already produced at a given origin in
-eval/backtest.py -- they add no new information, so they inherit that
-module's leakage guarantee for free.
-
-`select_best_model_per_origin` is the one place in this phase that
-estimates something from the backtest itself (which model is "best"), so it
-needs its own guarantee: at each origin, the selected model is whichever
-had the lowest cumulative MAE using ONLY that city's STRICTLY EARLIER
-origins (see the `cum_sum`/`cum_n` update order below -- the current
-origin's own errors are folded into the running totals only AFTER the
-selection for that origin has been made). A city's very first backtest
-origin therefore has no prior history to select from and is dropped from
-all three approaches, so the comparison in Phase 3 is apples-to-apples.
-"""
-
+import os
+import sys
 import numpy as np
 import pandas as pd
+
+if __package__ in (None, ""):  # direct run: put the source root on sys.path
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from eval.backtest import add_error_columns
 
@@ -53,10 +38,6 @@ def trimmed_mean_ensemble(results_df):
 
 
 def select_best_model_per_origin(results_df):
-    """Leakage-free 'production rule': at each origin, use whichever model
-    had the lowest cumulative MAE over that city's strictly earlier
-    origins. Returns rows only for origins where a prior-origin history
-    exists (i.e. every city's first backtest origin is dropped)."""
     df = add_error_columns(results_df)
     out_rows = []
 
@@ -82,6 +63,10 @@ def select_best_model_per_origin(results_df):
                             "selected_model": best_model,
                         })
 
+            # NO LEAKAGE: the current origin's own errors are folded into the
+            # running totals only AFTER the selection above, so each origin is
+            # chosen from strictly earlier origins. A city's first origin has no
+            # history and is dropped from all approaches.
             cur = g[g["origin_year"] == origin]
             for m, sub in cur.groupby("model"):
                 cum_sum[m] = cum_sum.get(m, 0.0) + sub["abs_error"].sum()
@@ -112,8 +97,6 @@ def score_approach(pred_df, label):
 
 
 def compare_approaches(results_df):
-    """Restricts all three approaches to the (city, origin) pairs where a
-    best-model selection is possible, then scores each on that common set."""
     best = select_best_model_per_origin(results_df)
     common_keys = best[["place_id", "origin_year"]].drop_duplicates()
 
@@ -121,7 +104,7 @@ def compare_approaches(results_df):
     mean_ens = simple_mean_ensemble(restricted)
     trimmed_ens = trimmed_mean_ensemble(restricted)
 
-    # ARIMA-only baseline (the single fixed model that wins Phase 2) on the
+    # ARIMA-only baseline (the single fixed model that wins the backtest) on the
     # same restricted rows, for reference alongside the per-city selector.
     arima_only = restricted[restricted["model"] == "arima_111"][
         ["place_id", "city", "origin_year", "horizon", "target_year", "actual", "predicted"]

@@ -1,9 +1,8 @@
-"""Single place every other phase imports the model zoo from.
+import os
+import sys
 
-Every entry exposes the same two-function interface:
-    fit(series) -> object          # series = (years, values)
-    predict(fitted, h) -> array of length h, on the population scale
-"""
+if __package__ in (None, ""):  # direct run: put the source root on sys.path
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models import arima, ets, exponential, linear_trend, modified_exponential, naive
 from models.common import MIN_OBS
@@ -19,8 +18,6 @@ MODELS = {
 
 
 def fit_predict(name, series, h):
-    """Convenience wrapper: fit model `name` on `series` and return an
-    h-length forecast, or None if the model failed/had too few observations."""
     years, values = series
     if len(values) < MIN_OBS[name]:
         return None

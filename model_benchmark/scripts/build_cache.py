@@ -1,13 +1,3 @@
-"""
-Pulls ACS1 place-level population (B01003_001E) for every available year,
-2005-present (2020 skipped -- ACS1 was not released that year), caches each
-year to parquet, and writes a filtered population panel restricted to cities
-whose latest available population is >= 250,000.
-
-Run from anywhere:
-    python model_benchmark/scripts/build_cache.py
-"""
-
 import datetime
 import os
 import sys
@@ -24,8 +14,8 @@ PANEL_OUT = os.path.join(os.path.dirname(DATA_DIR), "population_panel.parquet")
 
 
 def target_years():
-    current_year = datetime.date.today().year
-    return [y for y in range(2005, current_year + 1) if y != 2020]
+    latest_possible = datetime.date.today().year - 1
+    return [y for y in range(2005, latest_possible + 1) if y != 2020]
 
 
 def main():

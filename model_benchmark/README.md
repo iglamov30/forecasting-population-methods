@@ -1,7 +1,7 @@
-# model_benchmark -- cross-city forecast benchmark
+# Model Benchmark
 
 Self-contained module, independent of the other forecasting scripts in this
-repo. Builds a defensible cross-city *ranking* of population forecasts for
+repo. Builds a cross-city *ranking* of population forecasts for
 ~96 US cities with population >= 250,000, using Census ACS1 place-level data
 (2005-present, 2020 missing).
 
@@ -26,11 +26,11 @@ once its inputs exist; nothing needs to be re-fetched from the network on
 a second run.
 
 ```
-python model_benchmark/scripts/build_cache.py       # Phase 0: fetch + cache population panel
-python model_benchmark/scripts/run_backtest.py      # Phase 2: expanding-window backtest, all 6 models
-python model_benchmark/scripts/run_ensembles.py     # Phase 3: ensembles vs. best-model selection
-python model_benchmark/scripts/run_intervals.py     # Phase 4: prediction intervals (slow: ~4 min, ETS simulation)
-python model_benchmark/scripts/run_pooled_model.py  # Phase 5: pooled/shrunk AR growth model
+python model_benchmark/scripts/build_cache.py       # fetch + cache population panel
+python model_benchmark/scripts/run_backtest.py      # expanding-window backtest, all 6 models
+python model_benchmark/scripts/run_ensembles.py     # ensembles vs. best-model selection
+python model_benchmark/scripts/run_intervals.py     # prediction intervals (slow: ~4 min, ETS simulation)
+python model_benchmark/scripts/run_pooled_model.py  # pooled/shrunk AR growth model
 ```
 
 `build_cache.py` and `run_backtest.py` must run before the others.
@@ -44,21 +44,22 @@ model_benchmark/
   core/census.py     generalized ACS1 fetcher (list of variables, not one hardcoded var)
   core/cache.py       per-year parquet cache
   models/             the 6-model zoo, common fit(series)/predict(fitted,h) interface
-  eval/backtest.py     Phase 2 expanding-window harness (the no-leakage rule lives here)
-  eval/ensembles.py    Phase 3 ensembles + leakage-free best-model selector
-  eval/intervals.py    Phase 4 empirical + model-based prediction intervals
-  eval/pooled_model.py Phase 5 pooled/shrunk AR growth model
+  eval/backtest.py     expanding-window harness (the no-leakage rule lives here)
+  eval/ensembles.py    ensembles + leakage-free best-model selector
+  eval/intervals.py    empirical + model-based prediction intervals
+  eval/pooled_model.py pooled/shrunk AR growth model
   data/                parquet cache + all CSV result tables
-  scripts/             one runnable script per phase, in the order above
-RESULTS.md             what won at each horizon, and what is NOT established
+  scripts/             one runnable script per step, in the order above
+RESULTS.md             what won at each horizon, and the limitations behind it
 ```
 
 ## Where the no-leakage rule is enforced
 
 Every model fit anywhere in this codebase only ever sees data up to and
-including its origin year -- see the docstrings at the top of
-`eval/backtest.py` (Phase 2 base case), `eval/ensembles.py` (the best-model
-selector uses only strictly-earlier origins), and `eval/pooled_model.py`
+including its origin year — see the `NO LEAKAGE` comments in
+`eval/backtest.py` (the base case: the one place training data is sliced),
+`eval/ensembles.py` (the best-model selector uses only strictly-earlier
+origins), and `eval/pooled_model.py`
 (the pooled regression and each city's local regression are both re-fit at
 every origin using only data through that origin, and year fixed effects
 are zeroed out when forecasting forward since a future year's shock is

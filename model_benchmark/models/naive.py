@@ -1,6 +1,3 @@
-"""(a) Naive: last observed value carried forward. The benchmark every other
-model must beat."""
-
 import numpy as np
 
 

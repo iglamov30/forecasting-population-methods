@@ -1,8 +1,3 @@
-"""Phase 2: runs the expanding-window backtest for all six models and saves
-the model-by-horizon error table. Run after scripts/build_cache.py.
-
-    python model_benchmark/scripts/run_backtest.py
-"""
 import os
 import sys
 import warnings
@@ -24,7 +19,7 @@ def main():
     results.to_parquet(os.path.join(DATA_DIR, "backtest_results.parquet"), index=False)
 
     table = score_by_model_horizon(results)
-    table.to_csv(os.path.join(DATA_DIR, "phase2_score_table.csv"), index=False)
+    table.to_csv(os.path.join(DATA_DIR, "backtest_scores.csv"), index=False)
 
     pd.set_option("display.width", 140)
     print(f"Backtest rows: {len(results)}")
